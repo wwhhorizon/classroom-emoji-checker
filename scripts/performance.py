@@ -32,7 +32,7 @@ def main():
                     'p50_ms':round(statistics.median(latencies),2),'p95_ms':round(latencies[94],2),
                     'max_ms':round(max(latencies),2),'requests_per_second':round(100/elapsed,2)}
     output={'environment':'Windows Python3.12 SQLite localhost; authenticated history 20 rows per page',
-        'scope':'Local course verification; not a production load estimate','results':results}
+        'scope':'Local history-query benchmark with 50 records and 100 requests','results':results}
     (ROOT/'docs'/'performance.json').write_text(json.dumps(output,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps(output,ensure_ascii=False,indent=2))
 

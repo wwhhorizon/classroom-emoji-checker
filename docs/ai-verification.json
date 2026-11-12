@@ -1,7 +1,7 @@
 {
-  "fixture_type": "Classroom-stage simulation using four officially licensed CREMA-D adult-actor performance clips; not a recording of actual students",
+  "fixture_type": "Classroom-stage composition using four licensed CREMA-D expression clips",
   "video": "demo-assets/classroom-expressions.mp4",
-  "video_sha256": "5885978699daf503a110146c72937b9c0d532f950c7b47aa961fba5fe2baa3e5",
+  "video_sha256": "c531d440e2a87d56bcc7a8fe91a059ddbc8fd6a3f2f415846f9ab9aef0085ee9",
   "source_manifest": "demo-assets/source-manifest.json",
   "source_repository": "https://github.com/CheyneyComputerScience/CREMA-D",
   "source_license": {
@@ -15,8 +15,8 @@
   "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a",
   "selection_rule": "Same adult actor; the preselected NEU/HAP/SAD/ANG intended-expression labels, without prediction-based selection",
   "source_clip_sampling": "Every 0.5 seconds of each complete raw clip, without filtering; exact predictions retained in source-manifest.json",
-  "isolated_database": "ai-integration-20261112-173346-163782.db",
-  "verified_at": "2026-11-12T09:33:54.539343Z",
+  "isolated_database": "ai-integration-20261113-000509-678172.db",
+  "verified_at": "2026-11-12T16:05:18.671224Z",
   "sample_seconds": 3,
   "threshold": 0.6,
   "worker_counts": {
@@ -32,12 +32,12 @@
     {
       "number": 1,
       "video_seconds": 0.0,
-      "captured_at": "2026-11-12T09:33:52.655675Z",
+      "captured_at": "2026-11-12T16:05:15.735076Z",
       "detected": 1,
       "results": [
         {
           "emoji": "neutral",
-          "confidence": 0.998454,
+          "confidence": 0.99798,
           "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
         }
       ],
@@ -47,12 +47,12 @@
     {
       "number": 2,
       "video_seconds": 3.0,
-      "captured_at": "2026-11-12T09:33:52.842964Z",
+      "captured_at": "2026-11-12T16:05:15.997876Z",
       "detected": 1,
       "results": [
         {
           "emoji": "neutral",
-          "confidence": 0.998011,
+          "confidence": 0.997929,
           "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
         }
       ],
@@ -62,12 +62,12 @@
     {
       "number": 3,
       "video_seconds": 6.0,
-      "captured_at": "2026-11-12T09:33:53.035833Z",
+      "captured_at": "2026-11-12T16:05:16.281347Z",
       "detected": 1,
       "results": [
         {
           "emoji": "neutral",
-          "confidence": 0.997868,
+          "confidence": 0.997825,
           "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
         }
       ],
@@ -77,12 +77,12 @@
     {
       "number": 4,
       "video_seconds": 9.0,
-      "captured_at": "2026-11-12T09:33:53.205676Z",
+      "captured_at": "2026-11-12T16:05:16.544246Z",
       "detected": 1,
       "results": [
         {
           "emoji": "surprised",
-          "confidence": 0.575404,
+          "confidence": 0.553439,
           "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
         }
       ],
@@ -92,12 +92,12 @@
     {
       "number": 5,
       "video_seconds": 12.0,
-      "captured_at": "2026-11-12T09:33:53.346625Z",
+      "captured_at": "2026-11-12T16:05:16.780934Z",
       "detected": 1,
       "results": [
         {
           "emoji": "happy",
-          "confidence": 0.4964,
+          "confidence": 0.488806,
           "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
         }
       ],
@@ -107,12 +107,12 @@
     {
       "number": 6,
       "video_seconds": 15.0,
-      "captured_at": "2026-11-12T09:33:53.455754Z",
+      "captured_at": "2026-11-12T16:05:17.027709Z",
       "detected": 1,
       "results": [
         {
           "emoji": "happy",
-          "confidence": 0.909501,
+          "confidence": 0.919327,
           "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
         }
       ],
@@ -122,12 +122,12 @@
     {
       "number": 7,
       "video_seconds": 18.0,
-      "captured_at": "2026-11-12T09:33:53.611058Z",
+      "captured_at": "2026-11-12T16:05:17.299568Z",
       "detected": 1,
       "results": [
         {
           "emoji": "surprised",
-          "confidence": 0.899213,
+          "confidence": 0.908513,
           "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
         }
       ],
@@ -137,12 +137,12 @@
     {
       "number": 8,
       "video_seconds": 21.0,
-      "captured_at": "2026-11-12T09:33:53.814706Z",
+      "captured_at": "2026-11-12T16:05:17.602818Z",
       "detected": 1,
       "results": [
         {
           "emoji": "surprised",
-          "confidence": 0.890009,
+          "confidence": 0.883842,
           "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
         }
       ],
@@ -152,12 +152,12 @@
     {
       "number": 9,
       "video_seconds": 24.0,
-      "captured_at": "2026-11-12T09:33:53.986139Z",
+      "captured_at": "2026-11-12T16:05:17.825181Z",
       "detected": 1,
       "results": [
         {
           "emoji": "neutral",
-          "confidence": 0.992979,
+          "confidence": 0.99287,
           "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
         }
       ],
@@ -167,12 +167,12 @@
     {
       "number": 10,
       "video_seconds": 27.0,
-      "captured_at": "2026-11-12T09:33:54.137928Z",
+      "captured_at": "2026-11-12T16:05:18.134795Z",
       "detected": 1,
       "results": [
         {
           "emoji": "neutral",
-          "confidence": 0.992188,
+          "confidence": 0.993996,
           "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
         }
       ],
@@ -182,12 +182,12 @@
     {
       "number": 11,
       "video_seconds": 30.0,
-      "captured_at": "2026-11-12T09:33:54.362565Z",
+      "captured_at": "2026-11-12T16:05:18.360632Z",
       "detected": 1,
       "results": [
         {
           "emoji": "neutral",
-          "confidence": 0.99373,
+          "confidence": 0.993278,
           "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
         }
       ],
@@ -210,76 +210,76 @@
     {
       "id": 9,
       "emoji": "neutral",
-      "confidence": 0.99373,
-      "timestamp": "2026-11-12T09:33:54Z",
+      "confidence": 0.993278,
+      "timestamp": "2026-11-12T16:05:18Z",
       "device_id": "classroom-expression-simulation",
       "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
     },
     {
       "id": 8,
       "emoji": "neutral",
-      "confidence": 0.992188,
-      "timestamp": "2026-11-12T09:33:54Z",
+      "confidence": 0.993996,
+      "timestamp": "2026-11-12T16:05:18Z",
       "device_id": "classroom-expression-simulation",
       "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
     },
     {
       "id": 7,
       "emoji": "neutral",
-      "confidence": 0.992979,
-      "timestamp": "2026-11-12T09:33:53Z",
+      "confidence": 0.99287,
+      "timestamp": "2026-11-12T16:05:17Z",
       "device_id": "classroom-expression-simulation",
       "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
     },
     {
       "id": 6,
       "emoji": "surprised",
-      "confidence": 0.890009,
-      "timestamp": "2026-11-12T09:33:53Z",
+      "confidence": 0.883842,
+      "timestamp": "2026-11-12T16:05:17Z",
       "device_id": "classroom-expression-simulation",
       "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
     },
     {
       "id": 5,
       "emoji": "surprised",
-      "confidence": 0.899213,
-      "timestamp": "2026-11-12T09:33:53Z",
+      "confidence": 0.908513,
+      "timestamp": "2026-11-12T16:05:17Z",
       "device_id": "classroom-expression-simulation",
       "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
     },
     {
       "id": 4,
       "emoji": "happy",
-      "confidence": 0.909501,
-      "timestamp": "2026-11-12T09:33:53Z",
+      "confidence": 0.919327,
+      "timestamp": "2026-11-12T16:05:17Z",
       "device_id": "classroom-expression-simulation",
       "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
     },
     {
       "id": 3,
       "emoji": "neutral",
-      "confidence": 0.997868,
-      "timestamp": "2026-11-12T09:33:53Z",
+      "confidence": 0.997825,
+      "timestamp": "2026-11-12T16:05:16Z",
       "device_id": "classroom-expression-simulation",
       "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
     },
     {
       "id": 2,
       "emoji": "neutral",
-      "confidence": 0.998011,
-      "timestamp": "2026-11-12T09:33:52Z",
+      "confidence": 0.997929,
+      "timestamp": "2026-11-12T16:05:15Z",
       "device_id": "classroom-expression-simulation",
       "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
     },
     {
       "id": 1,
       "emoji": "neutral",
-      "confidence": 0.998454,
-      "timestamp": "2026-11-12T09:33:52Z",
+      "confidence": 0.99798,
+      "timestamp": "2026-11-12T16:05:15Z",
       "device_id": "classroom-expression-simulation",
       "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
     }
   ],
   "pipeline_passed": true,
-  "scope": "Integration check on attributed expression performances in a classroom simulation; no classroom recognition accuracy claim"
+  "scope": "Video sampling, model inference and classroom record persistence"
 }

@@ -67,6 +67,16 @@ def test_registration_role_invites_and_salted_hash(setup):
         assert a.password_hash!=PWD and a.password_hash!=b.password_hash and bcrypt.checkpw(PWD.encode(),a.password_hash.encode())
 
 
+def test_two_character_chinese_name_registration_and_login(setup):
+    c,t=setup
+    response=c.post('/api/auth/register',headers=H,json=dict(username='李阳',password=PWD))
+    assert response.status_code==201,response.text
+    response=c.post('/api/auth/login',headers=H,json=dict(username='李阳',password=PWD))
+    assert response.status_code==200,response.text
+    assert response.json()['user']['username']=='李阳'
+    assert c.post('/api/auth/register',headers=H,json=dict(username='李',password=PWD)).status_code==422
+
+
 @pytest.mark.parametrize('password',['short','onlyletterspassword','1234567890123','界'*30+'1'])
 def test_weak_or_too_long_password_rejected(setup,password):
     c,t=setup

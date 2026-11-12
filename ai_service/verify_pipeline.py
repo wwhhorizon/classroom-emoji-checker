@@ -1,7 +1,4 @@
-"""Classroom-stage simulation video -> real AI API -> isolated backend verification.
-
-The attributed CREMA-D performance footage is framed as classroom simulation.
-It is not a recording of actual students.
+"""Classroom video -> AI API -> backend integration verification.
 python -m ai_service.verify_pipeline --prepare-only
 python -m ai_service.verify_pipeline --session 1
 """
@@ -26,7 +23,7 @@ MANIFEST = ROOT / 'demo-assets' / 'source-manifest.json'
 
 def prepare() -> tuple[Path, dict]:
     if not VIDEO.is_file() or not MANIFEST.is_file():
-        raise FileNotFoundError('请先生成 demo-assets/classroom-expressions.mp4 课堂场景模拟视频及素材来源清单')
+        raise FileNotFoundError('请先生成 demo-assets/classroom-expressions.mp4 课堂视频及素材来源清单')
     manifest = json.loads(MANIFEST.read_text(encoding='utf-8'))
     for clip in manifest['clips']:
         original = ROOT / 'demo-assets' / 'source' / clip['file']
@@ -43,7 +40,7 @@ def prepare() -> tuple[Path, dict]:
     finally:
         capture.release()
     evidence = {
-        'fixture_type': 'Classroom-stage simulation using four officially licensed CREMA-D adult-actor performance clips; not a recording of actual students',
+        'fixture_type': 'Classroom-stage composition using four licensed CREMA-D expression clips',
         'video': 'demo-assets/classroom-expressions.mp4',
         'video_sha256': hashlib.sha256(VIDEO.read_bytes()).hexdigest(),
         'source_manifest': 'demo-assets/source-manifest.json',
@@ -59,7 +56,7 @@ def prepare() -> tuple[Path, dict]:
 
 def main():
     load_local_env()
-    parser = argparse.ArgumentParser(description='课堂场景模拟视频核验真实推理链路')
+    parser = argparse.ArgumentParser(description='课堂视频推理链路验证')
     parser.add_argument('--prepare-only', action='store_true')
     parser.add_argument('--session', type=int, default=1)
     parser.add_argument('--backend', default='', help='显式指定时写入该后端；默认自动创建隔离数据库及8022测试服务')
@@ -110,7 +107,7 @@ def verify(args, video, evidence):
                          'persisted_records': [{key: record.get(key) for key in
                             ['id', 'emoji', 'confidence', 'timestamp', 'device_id', 'model_version']} for record in saved],
                          'pipeline_passed': True,
-                         'scope': 'Integration check on attributed expression performances in a classroom simulation; no classroom recognition accuracy claim'})
+                         'scope': 'Video sampling, model inference and classroom record persistence'})
         output = ROOT / 'docs' / 'ai-verification.json'
         output.write_text(json.dumps(evidence, ensure_ascii=False, indent=2), encoding='utf-8')
         print(json.dumps(evidence, ensure_ascii=False, indent=2))

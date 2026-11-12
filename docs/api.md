@@ -48,7 +48,7 @@ X-Requested-With: EmojiApp
 
 历史、统计和 CSV 支持 `session_id`、`course`（课程ID）、`class_name`、`from`、`to`、`source`；历史额外支持 `page` 与 `page_size`（1～100）。时间必须含时区，例如 `2026-11-12T00:00:00+08:00`；URL 中加号应编码。输出时间统一带 `Z`。起止时间均包含边界。
 
-统计返回 total、manual、ai、participants、distribution、trend、courses、classes。participants 为有身份的不同学生数，匿名 AI 不计入人数。trend 为实际存在记录的 UTC 分钟桶；无记录时不填造历史点。
+统计返回 total、manual、ai、participants、distribution、trend、courses、classes。participants 为有身份的不同学生数，匿名 AI 不计入人数。trend 按记录时间聚合为 UTC 分钟桶。
 
 WebSocket 消息结构为 `{"type":"statistics","data":{...}}`。握手与每轮推送核对会话和课堂访问范围；不接受学生连接。浏览器在切换课堂或退出时关闭旧连接。
 

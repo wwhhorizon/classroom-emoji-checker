@@ -90,13 +90,13 @@ CREATE TABLE emoji_records (
 	UNIQUE (event_id)
 );
 
+CREATE INDEX ix_emoji_records_session_id ON emoji_records (session_id);
+
 CREATE INDEX ix_emoji_session_time ON emoji_records (session_id, timestamp);
 
 CREATE INDEX ix_emoji_records_timestamp ON emoji_records (timestamp);
 
 CREATE INDEX ix_emoji_records_user_id ON emoji_records (user_id);
-
-CREATE INDEX ix_emoji_records_session_id ON emoji_records (session_id);
 
 CREATE TABLE schedule_users (
 	id INTEGER NOT NULL AUTO_INCREMENT, 

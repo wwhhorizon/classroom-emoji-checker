@@ -22,7 +22,7 @@ sys.path.insert(0,str(ROOT))
 from scripts.demo_story import SCENES, COURSE, CLASS_NAME
 from scripts.seed_lesson_demo import ACCOUNTS
 from scripts.fixture_server import fixture_server
-from scripts.browser_verify import login,go
+from scripts.browser_verify import login,go,launch_browser
 
 WORK=ROOT/'artifacts'/'demo'
 EXPORT=ROOT/'deliverables'/'demo-source'
@@ -71,13 +71,13 @@ def capture(dry=False):
     from playwright.sync_api import sync_playwright,expect
     errors=[];manifest=[];state={}
     with fixture_server(name='demo-dry' if dry else 'demo',port=8023,seed_module='scripts.seed_lesson_demo') as (base,password,database),sync_playwright() as p:
-        browser=p.chromium.launch()
+        browser=launch_browser(p)
         contexts={}
-        for role in ['guest','student','student2','teacher','admin','docs']:
+        for role in ['guest','student','student2','student3','student4','teacher','admin','docs']:
             settings=dict(viewport={'width':1440,'height':900},locale='zh-CN',timezone_id='Asia/Shanghai',accept_downloads=True)
             if not dry:settings.update(record_video_dir=str(WORK/'raw'),record_video_size={'width':1440,'height':900})
             ctx=browser.new_context(**settings)
-            if role in ['student','student2','teacher','admin']:
+            if role in ['student','student2','student3','teacher','admin']:
                 r=ctx.request.post(base+'/api/auth/login',headers={'X-Requested-With':'EmojiApp'},data={'username':ACCOUNTS[role],'password':password})
                 assert r.status==200,r.text()
             contexts[role]=ctx
@@ -117,9 +117,10 @@ def capture(dry=False):
 
         scene(1,'guest',lambda page:expect(page.locator('#login-form')).to_be_visible())
         def registration(page):
-            click(page,'#show-register');fill(page,'[name=username]','许沐阳');fill(page,'[name=password]',password)
+            click(page,'#show-register');fill(page,'[name=username]',ACCOUNTS['student4']);fill(page,'[name=password]',password)
             click(page,'#auth-submit');expect(page.locator('#login-form')).to_be_visible()
         scene(2,'guest',registration)
+        contexts['student4'].request.post(base+'/api/auth/login',headers={'X-Requested-With':'EmojiApp'},data={'username':ACCOUNTS['student4'],'password':password})
         users=contexts['admin'].request.get(base+'/api/admin/users').json();uid={u['username']:u['id'] for u in users}
         def course(page):
             ready(page);click(page,'#nav-sessions');click(page,'#new-course')
@@ -138,7 +139,7 @@ def capture(dry=False):
             click(page,'#session-form [type=submit]');expect(page.locator('#modal')).not_to_be_visible()
             state['sid']=next(s['id'] for s in contexts['admin'].request.get(base+'/api/sessions').json() if s['course_id']==state['cid'])
             click(page,f'[data-schedule="{state["sid"]}"]')
-            for name in ['student','student2']:page.locator(f'#schedule-form [name=user_ids][value="{uid[ACCOUNTS[name]]}"]').check()
+            for name in ['student','student2','student3','student4']:page.locator(f'#schedule-form [name=user_ids][value="{uid[ACCOUNTS[name]]}"]').check()
             page.wait_for_timeout(80 if dry else 1800);click(page,'#schedule-form [type=submit]')
             expect(page.locator('#modal')).not_to_be_visible()
         scene(4,'admin',schedule)
@@ -148,19 +149,18 @@ def capture(dry=False):
         scene(5,'student',first)
         def second(page):
             ready(page);choose(page);click(page,'[data-emoji=surprised]');click(page,'#send-emoji');click(page,'#nav-history')
-            expect(page.locator('[data-record-id]')).to_have_count(2)
+            expect(page.locator('[data-record-id]')).to_have_count(1)
             page.wait_for_timeout(100 if dry else 3000)
             click(page,'#logout')
-            fill(page,'#login-form [name=username]',ACCOUNTS['student2']);fill(page,'#login-form [name=password]',password)
+            fill(page,'#login-form [name=username]',ACCOUNTS['student3']);fill(page,'#login-form [name=password]',password)
             click(page,'#auth-submit');ready(page);choose(page)
             click(page,'[data-emoji=neutral]');click(page,'#send-emoji');click(page,'#nav-history')
             expect(page.locator('[data-record-id]')).to_have_count(1)
-            contexts['student'].request.post(base+'/api/auth/login',headers={'X-Requested-With':'EmojiApp'},data={'username':ACCOUNTS['student'],'password':password})
-        scene(6,'student',second)
+        scene(6,'student2',second)
         def realtime(page):
             ready(page);choose(page);expect(page.locator('[data-stat=total]')).to_contain_text('3')
             page.wait_for_timeout(100 if dry else 6500)
-            other=contexts['student'].new_page();other.goto(base);ready(other);choose(other)
+            other=contexts['student4'].new_page();other.goto(base);ready(other);choose(other)
             click(other,'[data-emoji=sad]');click(other,'#send-emoji');other.close();page.bring_to_front()
             expect(page.locator('[data-stat=total]')).to_contain_text('4',timeout=15000)
         scene(7,'teacher',realtime)
@@ -185,7 +185,7 @@ def capture(dry=False):
             expect(page.locator('#camera-result')).to_contain_text('本次保存',timeout=45000)
             page.wait_for_timeout(100 if dry else 8500)
             page.screenshot(path=str(ROOT/'docs'/'images'/'ai-video-desktop.png'),full_page=True)
-            # Keep the video visible during actual sampling; no invented labels or results.
+            # Keep the video visible until sampling completes.
             if dry:
                 page.wait_for_timeout(2500)
                 if page.locator('#camera-stop').is_visible():click(page,'#camera-stop')
@@ -214,15 +214,23 @@ def capture(dry=False):
         scene(11,'admin',export)
         def audit(page):
             ready(page);click(page,'#nav-users')
-            click(page,f'[data-user-toggle="{uid["许沐阳"]}"]');click(page,f'[data-user-toggle="{uid["许沐阳"]}"]')
+            click(page,f'[data-user-toggle="{uid[ACCOUNTS["student4"]]}"]');click(page,f'[data-user-toggle="{uid[ACCOUNTS["student4"]]}"]')
             click(page,'#nav-audit');expect(page.locator('tbody')).to_contain_text('导出记录')
         scene(12,'admin',audit)
         def closing(page):
-            ready(page);click(page,'#nav-settings');page.wait_for_timeout(100 if dry else 6500)
-            page.goto(base+'/docs');expect(page.locator('.swagger-ui')).to_be_visible()
+            login(page,base,ACCOUNTS['student4'],password)
+            ready(page);click(page,'#nav-settings')
+            fill(page,'#password-form [name=old_password]',password)
+            fill(page,'#password-form [name=new_password]',password+'-New9')
+            fill(page,'#password-form [name=confirm_password]',password+'-New9')
+            click(page,'#password-form [type=submit]');expect(page.locator('#login-form')).to_be_visible()
+            fill(page,'#login-form [name=username]',ACCOUNTS['student4'])
+            fill(page,'#login-form [name=password]',password+'-New9')
+            click(page,'#auth-submit');ready(page)
             page.wait_for_timeout(100 if dry else 3500)
-            page.mouse.wheel(0,450)
-        scene(13,'teacher',closing)
+            page.goto(base+'/docs');expect(page.locator('.swagger-ui')).to_be_visible()
+            page.wait_for_timeout(100 if dry else 3500);page.mouse.wheel(0,450)
+        scene(13,'student4',closing)
         result=contexts['admin'].request.get(base+'/api/emoji/statistics').json()
         assert result['manual']==4 and result['ai']==state['ai_count'] and result['total']==state['csv_rows']
         assert not errors,errors
@@ -288,34 +296,34 @@ def main():
     WORK.mkdir(parents=True,exist_ok=True);EXPORT.mkdir(parents=True,exist_ok=True)
     introduction='''# 中文解说演示
 
-## 课堂情境与素材
+## 课堂安排
 
-围绕“软件工程实践 · 需求分析与用例建模”完整演示。计算机2301班，高新校区G2-B403教室；周老师授课，林予安和陈知远为参加学生，许沐阳演示新生注册。人物姓名均为虚构账号，课程、课堂、反馈及导出由真实浏览器操作产生。
+课程为“软件工程实践 · 需求分析与用例建模”，班级为计算机2301，教室为高新校区G2-B403。丁老师授课，袁谦朗、吴卫昊、李阳、吕祖灿四位同学参加。
 
-| 课堂环节 | 操作与观察 |
+| 课堂环节 | 演示操作 |
 |---|---|
-| 课前安排 | 管理员建立课程、当前时段课堂及两人名单；初始零表情记录 |
-| 概念讲解 | 林予安主动提交开心 |
-| 案例讨论 | 林予安提交惊讶；陈知远提交平静，并分别检查个人历史 |
-| 随堂练习 | 林予安提交低落；教师无需刷新收到第四条反馈 |
-| 课后核对 | 课程、班级、时间筛选，真实视频采样，匿名识别记录及CSV导出 |
+| 课前安排 | 吕祖灿注册；管理员建立课程、安排时段并保存四人名单 |
+| 概念讲解 | 袁谦朗提交开心 |
+| 案例讨论 | 吴卫昊提交惊讶、李阳提交平静；查看各自历史 |
+| 随堂练习 | 吕祖灿提交低落；丁老师查看实时看板 |
+| 课后统计 | 按课程、班级、时间筛选；视频采样；导出CSV |
+| 账号维护 | 停用与恢复账号；修改密码后重新登录 |
 
-课堂环节属于讲解编排，系统不额外存储环节标签；趋势使用实际提交时间。主动反馈、AI观测与参加人数分别统计。单个表情不直接代表知识掌握程度。
-
-AI输入为 `demo-assets/classroom-expressions.mp4`，32秒，四个环节各8秒。CREMA-D授权动态表情素材以完整片段循环，绿幕替换为绘制的教室；画面明确标注课堂场景模拟及来源，没有预设识别结果。授权、原始素材、哈希及未筛选的模型结果见 `demo-assets/ATTRIBUTION.md` 和 `source-manifest.json`。
+视频输入为 `demo-assets/classroom-expressions.mp4`，包含四个课堂环节，共32秒。素材来源和许可见 `demo-assets/ATTRIBUTION.md`。
 
 ## 录制与复现
 
 ```powershell
 python -m pip install -r requirements-video.txt
 python -m playwright install chromium
-python -m ai_service.prepare_classroom_assets
 python scripts/build_classroom_sample.py
 python scripts/record_demo.py --dry-run
 python scripts/record_demo.py
 ```
 
-后台8011推理服务需要先运行；录制脚本使用独立8023后端与新数据库，仅提前创建账号，表情记录均从零产生。中文解说与字幕、分镜屏幕原件和CSV保存在 `deliverables/demo-source/`。语音缓存依据文本检查，修改解说后会重新生成。
+先运行8011推理服务。录制脚本在8023启动后端，创建演示账号，再依次执行注册、排课、反馈、采样和导出。配音、字幕、分镜和CSV保存在 `deliverables/demo-source/`。
+
+使用本机Edge录制时，在PowerShell设置 `$env:DEMO_BROWSER_CHANNEL='msedge'`，并执行 `python -m playwright install ffmpeg` 安装录屏编码工具。
 
 ## 分镜与解说
 

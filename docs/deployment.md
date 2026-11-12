@@ -4,7 +4,7 @@
 
 推荐 Python 3.12。双击“启动课堂表情系统.cmd”，或按 README 创建虚拟环境并安装 requirements.txt、requirements-ai.txt。首次运行 `python scripts/dev.py --seed` 自动生成 `.env` 中的随机服务令牌、注册邀请码和演示密码，初始化账号、课程、课堂和名单，启动8010后端和8011推理服务。
 
-本地 SQLite 位于 `data/emoji.db`。初始化只在缺少相应课程时创建课堂，不重置原有账号密码和历史。课堂时段到期后，管理员新建课堂并安排名单；不回填和篡改已有课堂时间。
+本地 SQLite 位于 `data/emoji.db`。初始化在缺少相应课程时创建课堂，并保留已有账号和历史。课堂时段到期后，管理员新建课堂并安排名单。
 
 服务启动后检查：
 
@@ -29,7 +29,7 @@ AI 健康响应应显示模型已加载。权重文件随工程提供；若缺�
 | COOKIE_SECURE | HTTPS 使用1，本地 HTTP 使用0 |
 | MYSQL_PASSWORD | Compose 数据库用户密码 |
 
-生产环境自行设置强随机配置，避免将 `.env` 提交到 Git。不要把数据库连接字符串或服务令牌粘贴到公开日志。演示初始化账号应在正式部署前停用或替换。
+部署时设置独立的服务令牌、注册邀请码和数据库密码，并通过受限的.env文件管理配置。正式使用前更换初始化账号密码。
 
 ## 摄像头与视频 worker
 
@@ -55,14 +55,14 @@ docker compose logs backend ai
 
 数据库端口不直接暴露；后端仅绑定本机8010。远程访问通过反向代理配置域名、HTTPS与WebSocket升级。使用 HTTPS 时设置 COOKIE_SECURE=1；代理须保持同一公开来源，并正确转发Host及协议。不要直接对公网开放 AI 端口。
 
-本次本地验收环境没有 Docker，MySQL/Compose 配置和远端工作流实际状态记录在 docs/verification.json。提供配置不等于容器部署已通过验收。
+本地测试采用SQLite，MySQL/Compose及CI的执行记录见docs/verification.json。
 
 ## 备份与恢复
 
 SQLite 维护时先停止后端，再备份 data/emoji.db 和独立保存的.env。恢复时放回原路径，保持同一账户和服务配置。MySQL 使用 mysqldump 等工具备份 emoji 数据库，并验证恢复；不要在运行中直接复制数据库卷目录。
 
-模型文件不包含业务数据，可根据固定哈希重新取得。系统没有需要备份的运行时人脸图片或视频目录。受控测试素材位于 artifacts/，由验证脚本主动生成，不属于采集数据。
+模型文件可根据固定哈希重新取得，课堂视频样例及来源位于demo-assets/。业务备份包含数据库和服务配置。
 
 ## 源码和版本
 
-仓库为 https://github.com/wwhhorizon/classroom-emoji-checker 。需求基线与实现阶段按真实修改提交，开发分支为 implementation/classroom，完成后合并主分支。测试、文档与录制脚本一同管理，不补造成员贡献历史。
+仓库为 https://github.com/wwhhorizon/classroom-emoji-checker 。主体实现位于implementation/classroom，演示及材料修订位于polish/lesson-presentation，交付版本合并至main。源码、测试、文档和录制脚本一同管理。
