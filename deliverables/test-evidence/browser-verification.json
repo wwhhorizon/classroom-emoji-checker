@@ -1,0 +1,74 @@
+{
+  "passed": true,
+  "stages": [
+    "注册学生账号",
+    "三角色登录；初始表情记录为零",
+    "管理员创建课程、课堂时段及三人名单",
+    "两名学生真实提交三条反馈，个人历史隔离",
+    "教师实时看板无需刷新收到第四条反馈",
+    "课程、班级、时间组合筛选与真实四条记录CSV导出",
+    "账号停用阻止登录，启用后恢复",
+    "浏览器修改密码并重新登录",
+    "学生与非任课教师越权被后端拒绝",
+    "390像素手机界面无横向溢出，表单与按钮有可读标签",
+    "导出与课堂安排操作审计可查"
+  ],
+  "page_errors": [],
+  "accessibility": {
+    "login": [],
+    "teacher": [],
+    "statistics": [],
+    "mobile-student": []
+  },
+  "csv_records": 4,
+  "statistics": {
+    "total": 4,
+    "manual": 4,
+    "ai": 0,
+    "participants": 2,
+    "distribution": {
+      "happy": 1,
+      "neutral": 1,
+      "sad": 1,
+      "surprised": 1,
+      "angry": 0,
+      "fearful": 0,
+      "disgusted": 0
+    },
+    "trend": [
+      {
+        "minute": "2026-11-12T06:15:00Z",
+        "total": 4,
+        "happy": 1,
+        "neutral": 1,
+        "sad": 1,
+        "surprised": 1,
+        "angry": 0,
+        "fearful": 0,
+        "disgusted": 0
+      }
+    ],
+    "courses": [
+      {
+        "name": "面向对象设计",
+        "total": 4
+      }
+    ],
+    "classes": [
+      {
+        "name": "计算机2301",
+        "total": 4
+      }
+    ]
+  },
+  "database": "data\\browser-20261112-141506-735872.db",
+  "screenshots": [
+    "docs\\images\\audit-desktop.png",
+    "docs\\images\\login-desktop.png",
+    "docs\\images\\schedule-desktop.png",
+    "docs\\images\\statistics-desktop.png",
+    "docs\\images\\student-desktop.png",
+    "docs\\images\\student-mobile.png",
+    "docs\\images\\teacher-desktop.png"
+  ]
+}

@@ -1,0 +1,87 @@
+"""Collect measured evidence; never turn configured checks into passed checks."""
+from datetime import datetime, timezone
+import json
+from pathlib import Path
+import xml.etree.ElementTree as ET
+
+ROOT=Path(__file__).resolve().parents[1]
+
+
+def main():
+    suites=list(ET.parse(ROOT/'artifacts'/'pytest-results.xml').getroot().iter('testsuite'))
+    def count(name):return sum(int(s.get(name,0)) for s in suites)
+    evidence={'verified_at':datetime.now(timezone.utc).isoformat(),
+        'environment':'Windows / Python 3.12 / SQLite / Chromium / OpenCV CPU',
+        'pytest':dict(tests=count('tests'),failures=count('failures'),errors=count('errors'),skipped=count('skipped'),seconds=round(sum(float(s.get('time',0)) for s in suites),2)),
+        'mysql_compose':{'status':'not_executed','reason':'Docker is not installed in the local verification environment'},
+        'privacy':{'runtime_face_storage':False,'runtime_video_storage':False,'ai_records_anonymous_by_default':True,
+            'controlled_fixture_separate_from_runtime_data':True},
+        'members':['袁谦朗 PB23111711','吴卫昊 PB23111689','李阳 PB23050986','吕祖灿 PB23111729']}
+    for key,file in [('browser','browser-verification.json'),('ai','ai-verification.json'),('performance','performance.json'),('demo','demo-verification.json')]:
+        path=ROOT/'docs'/file
+        if path.exists():evidence[key]=json.loads(path.read_text(encoding='utf-8'))
+    remote=ROOT/'docs'/'ci-verification.json'
+    if remote.exists():evidence['remote_ci']=json.loads(remote.read_text(encoding='utf-8'))
+    output=ROOT/'docs'/'verification.json';output.write_text(json.dumps(evidence,ensure_ascii=False,indent=2),encoding='utf-8')
+    text=f'''# 测试用例与实际记录
+
+本次验收环境为Windows、Python 3.12、SQLite、Chromium和OpenCV CPU。测试在隔离数据库执行，不混用日常数据。实测时间见 verification.json。
+
+## 自动化结果
+
+pytest共{count('tests')}项，失败{count('failures')}项，错误{count('errors')}项，跳过{count('skipped')}项，用时{evidence['pytest']['seconds']}秒。包含33项后端/业务/安全测试和18项AI测试。JUnit原始记录为artifacts/pytest-results.xml（提交包内复制到测试证据目录）。
+
+| 类别 | 核心用例及预期 |
+|---|---|
+| 账号 | 三类注册、邀请码、重复用户、弱密码、加盐哈希、登录失败限速 |
+| 会话 | 退出、改密、账号停用立即失效；WebSocket期间过期或停用也断开 |
+| 名单 | 有效学生、重复和非学生拒绝、版本冲突、提交与修改串行 |
+| 时间 | 未开始和已结束不能人工提交；AI事件时间范围和新鲜度校验 |
+| 范围 | 学生只本人；教师只所授课堂；学生不能进入管理接口 |
+| 表情 | 枚举、来源、历史分页、统计分布、同一筛选范围 |
+| CSV | BOM、公式前缀转义、导出权限与审计 |
+| AI入库 | 独立令牌、阈值、事件幂等、冲突事件、可选学生关联范围 |
+| 图像 | 真正JPEG/PNG、大小和像素限制、无脸、模型缺失、全程内存 |
+| 推理 | 七类概率映射、官方模型SHA256、真实空白图与授权动态素材链路 |
+| 重试 | 429/网络/5xx退避、永久错误终止、相同事件负载重试 |
+| 文档 | 本地Swagger资源、严格CSP、接口定义可显示，不依赖CDN |
+
+## 浏览器端到端
+
+'''+'\n'.join(f'{i}. {s}' for i,s in enumerate(evidence['browser']['stages'],1))+'''
+
+浏览器结果为通过，JavaScript页面错误为0。原始记录与截图索引位于 browser-verification.json。CSV使用真实下载文件解析，确认UTF-8 BOM及四条人工记录。
+
+可访问性检查覆盖登录、教师看板、统计分析和390像素手机学生页：可见表单控件有标签、按钮有名称、页面无整体横向溢出。另检查三角色桌面和手机截图、名单对话框及摄像头停止状态。该检查不是完整WCAG认证。
+
+## 真实AI链路
+
+课堂场景模拟视频采用CREMA-D同一成年演员的四段授权动态表情素材，合成到绘制教室中，按四个课堂环节完整循环。32秒视频每3秒采样一次；实际采样11帧，检测11脸，9条匿名AI记录入库，2条低置信结果过滤，0错误。来源、许可、哈希、每次推理结果与入库记录见 ai-verification.json 及 demo-assets/。原素材中的sad与anger表演存在模型误判，原样保留。该结果验证视频到入库链路，不作为课堂分类准确率。
+
+独立脚本测试和浏览器本地视频采样分别验证了worker路径与网页路径。演示中的AI记录由模型实际运行产生；原始画面仅在内存中处理。
+
+## 性能
+
+50条记录、100次历史查询，每页20条，分别测量1与10并发；P50、P95、最大延迟和吞吐见 performance.json。该固定本机测试不代表生产容量。
+
+## 实际执行边界
+
+本地Docker未安装，MySQL/Compose运行验收未执行；提供建表和配置。远程CI已触发，但GitHub返回账号因账单问题锁定，两个任务均未启动，执行步骤为0。原始说明及运行链接见ci-verification.json；不将工作流存在写成执行成功。
+
+## 复现
+
+```powershell
+python -m pytest -q --junitxml=artifacts/pytest-results.xml
+python scripts/browser_verify.py
+python -m ai_service.verify_pipeline --session 1
+python scripts/performance.py
+python scripts/record_demo.py --dry-run
+```
+
+AI与浏览器脚本需要8011独立服务运行，浏览器脚本另需安装Chromium。录制和素材生成依赖 requirements-video.txt。
+'''
+    (ROOT/'docs'/'testing.md').write_text(text,encoding='utf-8')
+    print('Measured checks collected:',evidence['pytest'])
+
+
+if __name__=='__main__':main()

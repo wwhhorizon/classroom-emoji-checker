@@ -1,0 +1,18 @@
+﻿[Script Info]
+ScriptType: v4.00+
+PlayResX: 1440
+PlayResY: 1000
+WrapStyle: 2
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Microsoft YaHei,24,&H00FFFFFF,&H00FFFFFF,&H0010243B,&H0010243B,0,0,0,0,100,100,0,0,1,0,0,2,45,45,22,1
+Style: Title,Microsoft YaHei,18,&H00B7C8DD,&H00B7C8DD,&H0010243B,&H0010243B,0,0,0,0,100,100,0,0,1,0,0,7,28,28,912,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:27.26,Title,,0,0,0,,06  案例讨论与个人历史
+Dialogue: 1,0:00:00.70,0:00:03.04,Default,,0,0,0,,进入案例讨论环节。
+Dialogue: 1,0:00:02.99,0:00:10.95,Default,,0,0,0,,林予安看到新的用例关系，补充发送一次惊讶，并在个人历史中看到自己的两条记录。
+Dialogue: 1,0:00:10.95,0:00:16.35,Default,,0,0,0,,再切换到陈知远，他选择平静，表示自己此时的感受。
+Dialogue: 1,0:00:16.35,0:00:23.80,Default,,0,0,0,,陈知远的个人历史只有自己的一条反馈，两位学生的数据范围由后端分别控制。

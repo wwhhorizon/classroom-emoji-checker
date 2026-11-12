@@ -1,0 +1,13 @@
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+data/
+artifacts/
+*.log
+*.aux
+*.toc
+*.out
+*.synctex.gz
+deliverables/latex-report/report.pdf

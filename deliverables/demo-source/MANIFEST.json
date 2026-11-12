@@ -1,0 +1,189 @@
+{
+  "passed": true,
+  "scene_count": 13,
+  "page_errors": [],
+  "database": "data\\demo-20261112-173827-826824.db",
+  "statistics": {
+    "total": 11,
+    "manual": 4,
+    "ai": 7,
+    "participants": 2,
+    "distribution": {
+      "happy": 1,
+      "neutral": 6,
+      "sad": 1,
+      "surprised": 3,
+      "angry": 0,
+      "fearful": 0,
+      "disgusted": 0
+    },
+    "trend": [
+      {
+        "minute": "2026-11-12T09:40:00Z",
+        "total": 1,
+        "happy": 1,
+        "neutral": 0,
+        "sad": 0,
+        "surprised": 0,
+        "angry": 0,
+        "fearful": 0,
+        "disgusted": 0
+      },
+      {
+        "minute": "2026-11-12T09:41:00Z",
+        "total": 3,
+        "happy": 0,
+        "neutral": 1,
+        "sad": 1,
+        "surprised": 1,
+        "angry": 0,
+        "fearful": 0,
+        "disgusted": 0
+      },
+      {
+        "minute": "2026-11-12T09:42:00Z",
+        "total": 7,
+        "happy": 0,
+        "neutral": 5,
+        "sad": 0,
+        "surprised": 2,
+        "angry": 0,
+        "fearful": 0,
+        "disgusted": 0
+      }
+    ],
+    "courses": [
+      {
+        "name": "软件工程实践 · 需求分析与用例建模",
+        "total": 11
+      }
+    ],
+    "classes": [
+      {
+        "name": "计算机2301",
+        "total": 11
+      }
+    ]
+  },
+  "csv_rows": 11,
+  "ai_input": "CREMA-D licensed expression video in a designed classroom scenario",
+  "scenes": [
+    {
+      "scene": 1,
+      "title": "一节课的反馈闭环",
+      "source_type": "real_browser_recording",
+      "narration": "这次演示围绕一节软件工程实践课展开，主题是需求分析与用例建模。周老师授课，林予安和陈知远参与课堂。我们从零条表情记录开始，依次完成排课、概念讲解后的反馈、案例讨论和随堂练习，再查看统计与导出。学生的主动反馈和视频识别都由实际操作产生。",
+      "screen": "01-screen.webm",
+      "voice": "01-voice.mp3",
+      "seconds": 29.031
+    },
+    {
+      "scene": 2,
+      "title": "新同学注册",
+      "source_type": "real_browser_recording",
+      "narration": "登录页使用中国科大高新校区的校园照片。这里以新同学许沐阳为例，填写用户名和密码，完成学生注册。教师和管理员注册时还需要各自的邀请码。演示中的人物姓名均为虚构账号；接下来切换到教学管理员，为这节课安排课程、时间和学生名单。",
+      "screen": "02-screen.webm",
+      "voice": "02-voice.mp3",
+      "seconds": 27.25
+    },
+    {
+      "scene": 3,
+      "title": "建立课程与授课关系",
+      "source_type": "real_browser_recording",
+      "narration": "管理员打开课程与课堂，新建软件工程实践，需求分析与用例建模，并选择周老师。用具体的课题命名，后面查看记录、筛选统计和导出时，就能清楚知道反馈对应哪节课。保存后，周老师可以访问这门课的课堂数据，教师的访问范围由后端检查。",
+      "screen": "03-screen.webm",
+      "voice": "03-voice.mp3",
+      "seconds": 26.891
+    },
+    {
+      "scene": 4,
+      "title": "安排本次课堂",
+      "source_type": "real_browser_recording",
+      "narration": "为这门课安排计算机二三零一班的课堂，教室是高新校区G二教学楼B四零三，时间覆盖当前演示时段。接着打开学生名单，选中林予安和陈知远并保存。名单与本次课堂绑定，学生需要在名单内，而且课堂正在进行，才能发送表情。",
+      "screen": "04-screen.webm",
+      "voice": "04-voice.mp3",
+      "seconds": 26.109
+    },
+    {
+      "scene": 5,
+      "title": "概念讲解后的反馈",
+      "source_type": "real_browser_recording",
+      "narration": "进入概念讲解环节，林予安选择刚安排的课堂。听完需求和用例的基本概念后，他选择开心并发送。页面立即显示这次反馈的课程、班级、表情和时间。系统记录的是学生主动选择的感受，教师可以结合提问进一步了解学生的理解情况。",
+      "screen": "05-screen.webm",
+      "voice": "05-voice.mp3",
+      "seconds": 25.407
+    },
+    {
+      "scene": 6,
+      "title": "案例讨论与个人历史",
+      "source_type": "real_browser_recording",
+      "narration": "进入案例讨论环节。林予安看到新的用例关系，补充发送一次惊讶，并在个人历史中看到自己的两条记录。再切换到陈知远，他选择平静，表示自己此时的感受。陈知远的个人历史只有自己的一条反馈，两位学生的数据范围由后端分别控制。",
+      "screen": "06-screen.webm",
+      "voice": "06-voice.mp3",
+      "seconds": 25.265
+    },
+    {
+      "scene": 7,
+      "title": "随堂练习与实时反馈",
+      "source_type": "real_browser_recording",
+      "narration": "周老师打开课堂看板，已有三条主动反馈，来自两位学生。随堂练习时，林予安遇到困难，再发送一次低落。教师页面保持打开，记录数量自动从三变成四，分布与趋势同时更新。低落提醒教师关注这位同学，但具体困难还需要通过交流确认。",
+      "screen": "07-screen.webm",
+      "voice": "07-voice.mp3",
+      "seconds": 26.313
+    },
+    {
+      "scene": 8,
+      "title": "核对这节课的统计",
+      "source_type": "real_browser_recording",
+      "narration": "管理员选择需求分析与用例建模这门课、计算机二三零一班和本次时间范围，再应用筛选。结果是两位学生的四条主动反馈。各个表情、课程和班级汇总都对应这批实际记录。课堂环节在演示脚本中说明，时间趋势则使用真实提交时间，不补造过去的曲线。",
+      "screen": "08-screen.webm",
+      "voice": "08-voice.mp3",
+      "seconds": 27.829
+    },
+    {
+      "scene": 9,
+      "title": "课堂场景视频采样",
+      "source_type": "real_browser_recording",
+      "narration": "现在演示视频采样。专用素材按课前准备、概念讲解、案例讨论和随堂练习编排，人物视频来自有授权的表情数据集，画面明确标注课堂场景模拟。浏览器播放并抽帧，独立服务实际检测人脸和计算表情。页面只展示真实模型结果；表情分类不能直接判断学生是否学会。",
+      "screen": "09-screen.webm",
+      "voice": "09-voice.mp3",
+      "seconds": 35.078
+    },
+    {
+      "scene": 10,
+      "title": "逐条核对识别结果",
+      "source_type": "real_browser_recording",
+      "narration": "采样停止后，将记录来源筛选为画面识别。这里显示刚才实际保存的类别、置信度和时间，低于阈值的结果不会入库。姓名栏显示课堂画面，因为系统没有识别人物身份。同一人物多次被采样会产生多条观测，参与学生人数仍然只依据主动反馈计算。",
+      "screen": "10-screen.webm",
+      "voice": "10-voice.mp3",
+      "seconds": 27.125
+    },
+    {
+      "scene": 11,
+      "title": "导出本次课堂数据",
+      "source_type": "real_browser_recording",
+      "narration": "管理员再次选中本次课程和班级，导出筛选结果。下载文件包含这两位同学的四条主动反馈，以及刚才实际产生的匿名识别记录，可用表格软件继续查看。课程、班级和时间字段让导出的数据仍然保留课堂背景，便于课后核对和复盘。",
+      "screen": "11-screen.webm",
+      "voice": "11-voice.mp3",
+      "seconds": 25.422
+    },
+    {
+      "scene": 12,
+      "title": "账号状态与操作追溯",
+      "source_type": "real_browser_recording",
+      "narration": "在用户管理中查看刚注册的许沐阳账号，演示停用后再恢复。账号停用会使已登录会话失效。操作记录中可以核对创建课程、安排课堂、保存名单、提交反馈、识别入库和导出等事件。管理员通过这些记录追溯本次课堂演示的数据来源。",
+      "screen": "12-screen.webm",
+      "voice": "12-voice.mp3",
+      "seconds": 26.187
+    },
+    {
+      "scene": 13,
+      "title": "账号设置与项目交付",
+      "source_type": "real_browser_recording",
+      "narration": "最后查看账号设置，用户可以验证原密码并设置新密码。接口文档来自实际后端，包含账号、课堂、表情、统计和人工智能服务接口。完整交付包含源码、数据库脚本、需求设计、测试记录、部署说明、用户手册、实验报告，以及这套可复现的课堂演示素材。",
+      "screen": "13-screen.webm",
+      "voice": "13-voice.mp3",
+      "seconds": 28.485
+    }
+  ]
+}
