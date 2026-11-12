@@ -41,7 +41,7 @@ python -m venv .venv
 .\.venv\Scripts\python.exe scripts/export_contract.py
 ```
 
-浏览器验收和视频录制方法见 [演示说明](docs/demo.md)。演示围绕“需求分析与用例建模”课堂展开，使用虚构师生账号完成真实操作。专用视频将有授权的动态表情素材合成到绘制的教室背景中，明确标注课堂场景模拟，运行真实检测、分类和结果入库。素材、来源及制作步骤位于 [demo-assets/](demo-assets/ATTRIBUTION.md)。页面不预填表情记录或虚构模型输出。
+演示围绕丁老师的“需求分析与用例建模”课堂展开，袁谦朗、吴卫昊、李阳、吕祖灿依次完成注册、课堂反馈和历史查询，随后展示教师看板、视频表情识别和统计导出。录制方法见 [演示说明](docs/demo.md)，视频素材来源及制作步骤见 [素材说明](demo-assets/ATTRIBUTION.md)。
 
 ## 文档与提交材料
 

@@ -1,0 +1,2 @@
+# Preserve the upstream bytes used by the vendor integrity manifest.
+app/static/vendor/swagger-ui/* -text

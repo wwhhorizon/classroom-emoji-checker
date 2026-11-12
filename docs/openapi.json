@@ -1780,7 +1780,7 @@
           "username": {
             "type": "string",
             "maxLength": 40,
-            "minLength": 3,
+            "minLength": 2,
             "pattern": "^[\\w.-]+$",
             "title": "Username"
           },

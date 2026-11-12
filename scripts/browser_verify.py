@@ -3,6 +3,7 @@ import csv
 from datetime import datetime, timedelta
 import io
 import json
+import os
 from pathlib import Path
 import sys
 
@@ -14,6 +15,13 @@ from playwright.sync_api import sync_playwright, expect
 OUT = ROOT / 'artifacts' / 'browser'
 IMAGES = ROOT / 'docs' / 'images'
 HEADERS = {'X-Requested-With': 'EmojiApp'}
+
+
+def launch_browser(playwright, **options):
+    channel=os.environ.get('DEMO_BROWSER_CHANNEL')
+    if channel:
+        options['channel']=channel
+    return playwright.chromium.launch(**options)
 
 
 def login(page, base, username, password):
@@ -53,7 +61,7 @@ def run():
     errors = []
     checks = {}
     with fixture_server() as (base, password, database), sync_playwright() as p:
-        browser = p.chromium.launch()
+        browser = launch_browser(p)
         contexts = {role: browser.new_context(viewport={'width':1440,'height':1000}, locale='zh-CN',
             timezone_id='Asia/Shanghai', accept_downloads=True) for role in ['student','student2','teacher','admin','guest']}
         pages = {role: ctx.new_page() for role,ctx in contexts.items()}
@@ -123,7 +131,7 @@ def run():
         student2.locator('[data-emoji=neutral]').click()
         student2.locator('#send-emoji').click()
         expect(student2.locator('[data-record-id]')).to_have_count(1)
-        stages.append('两名学生真实提交三条反馈，个人历史隔离')
+        stages.append('两名学生提交三条反馈，个人历史隔离')
         teacher.reload()
         expect(teacher.locator('#session-select')).to_be_visible()
         teacher.locator('#session-select').select_option(str(sid))
@@ -152,7 +160,7 @@ def run():
         assert content.startswith(b'\xef\xbb\xbf')
         rows=list(csv.reader(io.StringIO(content.decode('utf-8-sig'))))
         assert len(rows)==5,rows
-        stages.append('课程、班级、时间组合筛选与真实四条记录CSV导出')
+        stages.append('课程、班级、时间组合筛选与四条记录CSV导出')
         go(admin,'users')
         admin.locator(f'[data-user-toggle="{uid["课堂新同学"]}"]').click()
         expect(admin.locator(f'[data-user-toggle="{uid["课堂新同学"]}"]')).to_have_attribute('data-active','true')

@@ -4,9 +4,9 @@
     "注册学生账号",
     "三角色登录；初始表情记录为零",
     "管理员创建课程、课堂时段及三人名单",
-    "两名学生真实提交三条反馈，个人历史隔离",
+    "两名学生提交三条反馈，个人历史隔离",
     "教师实时看板无需刷新收到第四条反馈",
-    "课程、班级、时间组合筛选与真实四条记录CSV导出",
+    "课程、班级、时间组合筛选与四条记录CSV导出",
     "账号停用阻止登录，启用后恢复",
     "浏览器修改密码并重新登录",
     "学生与非任课教师越权被后端拒绝",
@@ -37,7 +37,7 @@
     },
     "trend": [
       {
-        "minute": "2026-11-12T06:15:00Z",
+        "minute": "2026-11-12T16:01:00Z",
         "total": 4,
         "happy": 1,
         "neutral": 1,
@@ -61,8 +61,10 @@
       }
     ]
   },
-  "database": "data\\browser-20261112-141506-735872.db",
+  "database": "data\\browser-20261113-000106-792645.db",
   "screenshots": [
+    "docs\\images\\ai-records-desktop.png",
+    "docs\\images\\ai-video-desktop.png",
     "docs\\images\\audit-desktop.png",
     "docs\\images\\login-desktop.png",
     "docs\\images\\schedule-desktop.png",

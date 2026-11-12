@@ -14,7 +14,7 @@
 | 关系数据库及核心实体 | app/models.py、database/schema.sql | SQLite 实际测试；提供 MySQL 建表与部署配置 |
 | Session 与 RBAC | main.current_user/admin/teacher_or_admin | 越权、会话吊销、停用与WebSocket测试 |
 | 统一错误与 OpenAPI | main.py 异常处理；/docs；docs/openapi.json | 输入验证和接口契约导出 |
-| 视频采样、检测、分类 | ai_service/worker.py 与推理模块；浏览器采样 | 受控视频逐帧真实推理，结果经后端入库 |
+| 视频采样、检测、分类 | ai_service/worker.py 与推理模块；浏览器采样 | worker与网页视频采样、摄像头getUserMedia链路验证，结果经后端入库 |
 | 至少五类情绪 | 七类 emoji 映射 | 模型输出8类，contempt与neutral合并 |
 | 配置阈值与采样频率 | AI_CONFIDENCE_THRESHOLD、AI_SAMPLE_SECONDS | 高低阈值边界与采样配置测试 |
 | AI 来源、时间、课堂与置信度 | EmojiRecord；/api/ai/emoji-results | 持久化字段与事件幂等测试 |
@@ -24,8 +24,8 @@
 | API、设计、测试、部署、用户手册 | docs/ | 文档、可运行命令与运行结果核对 |
 | 演示视频5～8分钟 | deliverables/ | 中文解说、实际浏览器录制、视频时长检查 |
 | 实验报告及AI局限分析 | deliverables/latex-report/report.tex 与 PDF | 编译、逐页查看、与实测结果核对 |
-| Git 分支与真实记录 | GitHub 源码仓库 | 按实际实现阶段提交，不补造成员历史 |
+| Git 分支管理 | GitHub 源码仓库 | 按实现阶段提交，开发分支合并main |
 
-用户明确要求不填写个人贡献，报告仅列四位成员及学号。指导书中的团队分工与贡献表不在本次内容中代填。
+成员信息按已确认的提交范围列姓名和学号。
 
-选做项：提供 Docker Compose 与 CI 配置；匿名 AI 聚合已实现；未实现消息队列与 MCP Server。MySQL、Compose 和远端 CI 的实际执行状态以测试记录为准。
+选做内容包括 Docker Compose、CI 配置和匿名 AI 聚合。MySQL、Compose 和远端 CI 的执行状态见测试记录。

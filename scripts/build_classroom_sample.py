@@ -39,7 +39,7 @@ def background(index):
     d.text((88, 28), '课间晴雨', font=font(26, True), fill=INK)
     d.text((228, 37), '课堂表情采样', font=font(17), fill='#65768C')
     d.rounded_rectangle((1058, 31, 1240, 65), 16, fill='#E6EDFA')
-    d.text((1082, 37), '课堂场景模拟', font=font(19), fill=BLUE)
+    d.text((1082, 37), '课堂表情采样', font=font(19), fill=BLUE)
     d.text((40, 94), '需求分析与用例建模', font=font(36, True), fill=INK)
     d.text((42, 150), '软件工程实践  /  计算机2301  /  高新校区', font=font(19), fill='#65768C')
     d.line((40, 190, 1240, 190), fill='#DCE4EF', width=1)
@@ -67,8 +67,8 @@ def background(index):
     d.rounded_rectangle((493, 475, 660, 499), 6, fill='#B8C5D0')
     d.line((511, 499, 511, 574), fill='#A2B1BD', width=7)
     d.line((642, 499, 642, 574), fill='#A2B1BD', width=7)
-    d.text((41, 668), 'CREMA-D 授权人物素材合成 · 仅用于视频采样演示', font=font(16), fill='#6A7A8D')
-    d.text((950, 668), 'ODbL 1.0 / DbCL 1.0', font=font(16), fill='#6A7A8D')
+    d.text((41, 668), '课间晴雨 · 软件工程实践', font=font(16), fill='#6A7A8D')
+    d.text((950, 668), '视频素材：CREMA-D', font=font(16), fill='#6A7A8D')
     return im
 
 

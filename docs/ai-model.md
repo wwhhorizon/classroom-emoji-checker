@@ -1,6 +1,6 @@
 # 视频表情推理说明
 
-AI模块使用OpenCV Haar人脸检测器定位正面人脸，将灰度人脸缩放为64×64像素，再调用ONNX Model Zoo发布的FER+卷积网络。推理运行于CPU，与业务后端分别启动。人脸检测和网络推理使用真实模型，未以随机数或规则替代。
+AI模块使用OpenCV Haar人脸检测器定位正面人脸，将灰度人脸缩放为64×64像素，再调用ONNX Model Zoo发布的FER+卷积网络。推理运行于CPU，与业务后端分别启动。
 
 ## 模型与依赖
 
@@ -34,7 +34,7 @@ AI模块使用OpenCV Haar人脸检测器定位正面人脸，将灰度人脸缩�
 
 `ai_service.worker`接收摄像头编号或视频路径。默认每3秒采样一次，默认阈值0.6，可通过AI_SAMPLE_SECONDS和AI_CONFIDENCE_THRESHOLD或命令行调整。每张通过过滤的人脸生成独立event_id；同一次回传的重试复用原event_id，由后端唯一约束避免重复入库。网络超时、429和5xx最多尝试5次，等待1、2、4、8秒；401等永久错误直接结束本次提交。一个样本失败后继续下一次采样。后端再次检查置信度与课堂时间。
 
-AI记录默认不关联个人身份，user_id为空，保留课堂、来源AI、置信度、设备标识、事件ID、模型版本和UTC时间。视频中多张脸按独立检测结果记录，不能将样本条数解释为真实上课人数。
+AI记录默认采用匿名方式，user_id为空，保存课堂、来源AI、置信度、设备标识、事件ID、模型版本和UTC时间。多张人脸分别生成观测记录，教师看板将AI观测次数与参加学生人数分开展示。
 
 ```powershell
 python -m ai_service.worker --source 0 --session 1
@@ -45,21 +45,21 @@ python -m ai_service.worker --source path/to/video.mp4 --session 1 --sample-seco
 
 独立服务在8011端口提供 `POST /infer`，使用 `Authorization: Bearer AI_SERVICE_TOKEN`，接收multipart的file字段，只支持JPEG/PNG，单帧最多2MB、800万像素。返回检测数量和各脸的emoji、confidence、model_version。没有人脸返回空数组，模型缺失或哈希错误返回503。
 
-请求流先检查总大小，再由内存MIME解析器提取文件；未调用会将大文件缓冲至临时磁盘的UploadFile接口。解码图像、采样帧及JPEG仅保留于内存，日志不输出图像、原视频、文件名或完整推理请求。后端只保存结构化结果。项目随附的授权表情素材单独放在demo-assets，用于课堂场景模拟，与运行时采集数据分开。
+请求流先检查总大小，再由内存MIME解析器提取文件。解码图像、采样帧及JPEG在内存中处理，后端保存结构化推理结果。运行日志记录事件、耗时和错误状态。演示视频及原始素材位于demo-assets，来源和许可见该目录的ATTRIBUTION.md。
 
-## 实际验证
+## 集成验证
 
-`tests/test_ai.py`覆盖七类映射、非法模型输出、图片大小与尺寸、格式错误、无脸真实推理、权重校验、令牌鉴权、模型不可用、请求格式、网络重试及回传幂等负载。实际执行结果由总测试记录汇总。
+`tests/test_ai.py`覆盖七类映射、非法模型输出、图片大小与尺寸、格式错误、无脸输入、权重校验、令牌鉴权、模型不可用、请求格式、网络重试及回传幂等负载，测试结果汇总于docs/testing.md。
 
-演示采用CREMA-D官方授权的动态表情素材，选取同一22岁成年演员的Neutral、Happy、Sad、Anger四段完整表演。四段按素材标签事先确定，未根据模型输出筛选。原始FLV共约1.2MB，逐段核验官方Git LFS SHA-256后转为H.264，加入中文课程环节框架，形成 `demo-assets/classroom-expressions.mp4`。画面持续显示“课堂场景模拟”和CREMA-D素材来源。原数据库及选取子集按ODbL-1.0提供，单项内容按DbCL-1.0提供，原许可与来源说明随素材附带。
+演示视频采用CREMA-D数据集中Neutral、Happy、Sad、Anger四段动态表情素材，配合课程环节和教室背景，形成 `demo-assets/classroom-expressions.mp4`。原始FLV共约1.2MB，转换格式前核对官方Git LFS SHA-256。数据库许可为ODbL-1.0，单项内容许可为DbCL-1.0，原许可和来源随素材提供。
 
-`python -m ai_service.prepare_classroom_assets`可重新取得四段官方素材、校验哈希，并对每段完整视频从第0帧开始每0.5秒执行真实检测与分类。`demo-assets/source-manifest.json`保留全部检测结果，包括低置信结果及原表演标签与模型输出不一致的样本。本次原始片段检查中，Happy表演随动作变化产生neutral、surprised、happy输出，Sad表演主要识别为neutral，Anger表演主要识别为surprised；这些结果均保留。
+`python -m ai_service.prepare_classroom_assets`下载四段素材并校验哈希，从第0帧开始每0.5秒检测与分类；结果保存在 `demo-assets/source-manifest.json`。
 
-`python -m ai_service.verify_pipeline --prepare-only`检查合成视频与原素材哈希。运行 `python -m ai_service.verify_pipeline --session 1` 会自动创建独立测试数据库和8022后端，完整读取课堂场景模拟视频，调用已运行的8011独立AI服务，输出 `docs/ai-verification.json`。本次32秒、1280×720、15fps合成视频每3秒采样一次，共11帧，检测到11张人脸，9条通过0.6阈值并入库，2条被过滤，接口错误为0。9秒处surprised置信度0.575404、12秒处happy置信度0.496400均被过滤；所有逐帧类别与置信度仍保留在JSON的samples字段。日常8010数据库不参与该验证。该验证检查真实视频处理与入库链路；原素材为演员表演，未提供真实课堂识别准确率。
+`python -m ai_service.verify_pipeline --prepare-only`检查视频与原素材哈希。运行 `python -m ai_service.verify_pipeline --session 1` 自动创建测试数据库和8022后端，调用8011推理服务，输出 `docs/ai-verification.json`。本次32秒、1280×720、15fps视频每3秒采样一次，共11帧，检测到11张人脸，9条通过0.6阈值并入库，2条被过滤，接口错误为0。JSON中的samples字段保存每次采样的类别、置信度及处理结果。
 
 ## 局限与偏差
 
-FER+训练数据为FER人脸表情数据及众包标签，未针对本校课堂重新训练。摄像头视角、光照、遮挡、脸部尺寸及不同人群的表情习惯会影响结果。正面Haar检测对侧脸和口罩的适应性有限；表情类别也不能直接证明理解程度或学生的心理状态。教师看板分别展示主动反馈和AI观察结果，教学判断应结合课堂互动及学生主动反馈。
+FER+基于FER人脸表情数据及众包标签训练。摄像头视角、光照、遮挡和脸部尺寸会影响分类，正面Haar检测器对侧脸和口罩的检测效果较弱。本次素材测试中，Sad表演多次被判为neutral，Anger表演多次被判为surprised。逐帧类别、置信度和阈值处理结果记录于ai-verification.json。教师可结合主动反馈、课堂提问和练习情况解释表情变化。
 
 ## 官方来源
 

@@ -55,7 +55,7 @@ def prepare():
                 'actor_metadata': {'dataset_actor_id': 1045, 'age': 22, 'sex': 'Male', 'race': 'Asian'},
                 'selection_rule': 'Same adult actor; the preselected NEU/HAP/SAD/ANG intended-expression labels, without prediction-based selection',
                 'sampling_rule': 'First frame and then every 0.5 seconds in each complete clip; all samples retained',
-                'classroom_context': 'Licensed facial-expression performance footage placed within a simulated classroom-stage layout; not a recording of actual students',
+                'classroom_context': 'Licensed facial-expression footage composed with classroom-stage graphics',
                 'clips': []}
     for filename, label, emoji in CLIPS:
         pointer = fetch(RAW + 'VideoFlash/' + filename).decode('ascii')

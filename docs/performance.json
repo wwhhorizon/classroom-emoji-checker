@@ -1,6 +1,6 @@
 {
   "environment": "Windows Python3.12 SQLite localhost; authenticated history 20 rows per page",
-  "scope": "Local course verification; not a production load estimate",
+  "scope": "Local history-query benchmark with 50 records and 100 requests",
   "results": {
     "1": {
       "requests": 100,

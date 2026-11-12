@@ -14,7 +14,7 @@ SUFFIXES={'.pyc','.log','.aux','.toc','.out','.synctex.gz'}
 def main():
     evidence=ROOT/'deliverables'/'test-evidence';evidence.mkdir(exist_ok=True)
     shutil.copy2(ROOT/'artifacts'/'pytest-results.xml',evidence/'pytest-results.xml')
-    for name in ['verification.json','browser-verification.json','ai-verification.json','performance.json','demo-verification.json','ci-verification.json']:
+    for name in ['verification.json','browser-verification.json','ai-verification.json','performance.json','demo-verification.json','camera-verification.json','ci-verification.json']:
         path=ROOT/'docs'/name
         if path.exists():shutil.copy2(path,evidence/name)
     commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
@@ -34,9 +34,9 @@ def main():
 - 三种角色和操作流程：README.md、docs/user-manual.md、docs/demo.md。
 - 源码仓库：https://github.com/wwhhorizon/classroom-emoji-checker
 
-演示围绕“需求分析与用例建模”展开，人物姓名为虚构账号，反馈通过真实浏览器生成。视频素材明确标注课堂场景模拟，识别结果为实际模型输出。原有宿舍报修项目独立保留。
+演示课程为“软件工程实践 · 需求分析与用例建模”，丁老师授课，袁谦朗、吴卫昊、李阳、吕祖灿参加。视频依次展示注册、课堂安排、四人反馈、实时看板、视频采样、统计导出和账号维护。
 
-压缩包中的MANIFEST-SHA256.txt逐项列出文件哈希。因未提供组号，本包以“四人组”命名；个人分工与贡献比例按用户要求不代填。
+提交包以“四人组”命名，MANIFEST-SHA256.txt列出源码提交号和文件哈希。
 '''
     (ROOT/'提交说明.md').write_text(info,encoding='utf-8')
     target=ROOT.parent/'SE-EmojiChecker-四人组-最终提交.zip'

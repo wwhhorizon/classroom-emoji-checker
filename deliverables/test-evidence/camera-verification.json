@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "browser_version": "157.0.4341.46",
+  "input": "Chromium test camera with classroom video Y4M",
+  "get_user_media": true,
+  "tracks_ended_after_stop": true,
+  "ai_records": 1,
+  "page_errors": [],
+  "database": "data\\camera-20261113-000252-520192.db"
+}

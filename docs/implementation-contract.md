@@ -13,6 +13,8 @@
 
 ## API v1（前端/验证共同依赖）
 
+2026年11月13日修订：注册用户名长度为2～40个字符，支持“李阳”等两字中文姓名。演示账号配置位于scripts/seed_lesson_demo.py，学生为袁谦朗、吴卫昊、李阳、吕祖灿，教师为丁老师。
+
 - POST /api/auth/register {username,password,role,email?,invite_code?}；POST login {username,password} -> {user,access_token,token_type}；POST logout；PUT password {old_password,new_password}；GET /api/users/me
 - GET /api/courses -> [{id,name,teacher_id,teacher}]，按角色范围。POST /api/admin/courses {name,teacher_id}
 - GET /api/sessions -> [{id,course_id,course,teacher_id,teacher,start_at,end_at,class_name,room,scheduled_count,enrolled,version}]，学生限已排课，教师限自己课程。
@@ -30,8 +32,8 @@
 
 - FastAPI ai_service.main:app，127.0.0.1:8011；/health 返回模型是否加载；POST /infer 使用独立令牌、multipart file，限制2MB与图像尺寸，OpenCV Haar 检测 + FER+ ONNX 推理；返回 {detected,results:[{emoji,confidence,model_version}],model_version}，无需后端概念。
 - ai_service/worker.py CLI --source 0|path --session ID --backend URL --ai-url URL，采样配置 AI_SAMPLE_SECONDS，阈值 AI_CONFIDENCE_THRESHOLD，网络重试退避，内存jpeg，调用infer与emoji-results，event UUID，匿名。不保存帧/视频。
-- 模型本地 ai_service/models/emotion-ferplus-8.onnx；提供 download_model.py ，真实权重随提交包附带；来源记录 LICENSE/模型说明。
-- 模型实现与测试由AI负责人处理，前端/后端负责人不得假造分类。
+- 模型本地 ai_service/models/emotion-ferplus-8.onnx；提供download_model.py，权重随提交包附带；来源记录在LICENSE和模型说明中。
+- 模型推理、类别映射和服务测试在ai_service/中实现，前端展示结构化推理结果。
 
 ## 文件职责
 
