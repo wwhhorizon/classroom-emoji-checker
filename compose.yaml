@@ -1,0 +1,48 @@
+services:
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: emoji
+      MYSQL_USER: emoji
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?set MYSQL_PASSWORD}
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+    volumes: [mysql_data:/var/lib/mysql]
+    healthcheck:
+      test: [CMD-SHELL, 'MYSQL_PWD="$$MYSQL_PASSWORD" mysqladmin ping -h localhost -u emoji --silent']
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  backend:
+    build: .
+    ports: ['127.0.0.1:8010:8010']
+    environment:
+      DATABASE_URL: mysql+pymysql://emoji:${MYSQL_PASSWORD}@db:3306/emoji?charset=utf8mb4
+      AI_SERVICE_TOKEN: ${AI_SERVICE_TOKEN:?set AI_SERVICE_TOKEN}
+      ADMIN_INVITE_CODE: ${ADMIN_INVITE_CODE:?set ADMIN_INVITE_CODE}
+      TEACHER_INVITE_CODE: ${TEACHER_INVITE_CODE:?set TEACHER_INVITE_CODE}
+      DEMO_PASSWORD: ${DEMO_PASSWORD:?set DEMO_PASSWORD}
+      AI_CONFIDENCE_THRESHOLD: ${AI_CONFIDENCE_THRESHOLD:-0.6}
+      AI_SAMPLE_SECONDS: ${AI_SAMPLE_SECONDS:-3}
+      AI_URL: http://ai:8011
+      COOKIE_SECURE: ${COOKIE_SECURE:-0}
+    command: [sh, -c, 'python -m app.seed && uvicorn app.main:app --host 0.0.0.0 --port 8010']
+    depends_on:
+      db: {condition: service_healthy}
+      ai: {condition: service_healthy}
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8010/health')"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  ai:
+    build: .
+    command: [uvicorn, 'ai_service.main:app', --host, 0.0.0.0, --port, '8011']
+    environment:
+      AI_SERVICE_TOKEN: ${AI_SERVICE_TOKEN}
+    healthcheck:
+      test: [CMD, python, -c, "import json,urllib.request; assert json.load(urllib.request.urlopen('http://localhost:8011/health'))['model_loaded']"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+volumes:
+  mysql_data:

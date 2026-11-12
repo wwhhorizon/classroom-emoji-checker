@@ -1,0 +1,32 @@
+{
+  "package": "swagger-api/swagger-ui",
+  "version": "v5.34.1",
+  "license": "Apache-2.0",
+  "release": "https://github.com/swagger-api/swagger-ui/releases/tag/v5.34.1",
+  "files": [
+    {
+      "file": "swagger-ui-bundle.js",
+      "bytes": 1685697,
+      "sha256": "36eeb4d5640b9c036b1d0f854499af1cceebbdb260b790a03a18be5e8488fbf5",
+      "source": "https://raw.githubusercontent.com/swagger-api/swagger-ui/v5.34.1/dist/swagger-ui-bundle.js"
+    },
+    {
+      "file": "swagger-ui.css",
+      "bytes": 187576,
+      "sha256": "c3cfe8248c4b0b89673600fb829924eafbac6de4bc4b2b06f5f5243483074d0a",
+      "source": "https://raw.githubusercontent.com/swagger-api/swagger-ui/v5.34.1/dist/swagger-ui.css"
+    },
+    {
+      "file": "LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "source": "https://raw.githubusercontent.com/swagger-api/swagger-ui/v5.34.1/LICENSE"
+    },
+    {
+      "file": "NOTICE",
+      "bytes": 55,
+      "sha256": "0d20d1adef18aee3f40dd258172155521ce702ac445cb5f7b7d60ed32dad2fb2",
+      "source": "https://raw.githubusercontent.com/swagger-api/swagger-ui/v5.34.1/NOTICE"
+    }
+  ]
+}
