@@ -1,0 +1,12 @@
+﻿记录编号,用户,课堂编号,课程,班级,表情,来源,置信度,设备,模型版本,采样时间UTC
+1,林予安,1,软件工程实践 · 需求分析与用例建模,计算机2301,happy,MANUAL,,browser,,2026-11-12T09:40:33Z
+2,林予安,1,软件工程实践 · 需求分析与用例建模,计算机2301,surprised,MANUAL,,browser,,2026-11-12T09:41:00Z
+3,陈知远,1,软件工程实践 · 需求分析与用例建模,计算机2301,neutral,MANUAL,,browser,,2026-11-12T09:41:12Z
+4,林予安,1,软件工程实践 · 需求分析与用例建模,计算机2301,sad,MANUAL,,browser,,2026-11-12T09:41:34Z
+5,,1,软件工程实践 · 需求分析与用例建模,计算机2301,neutral,AI,0.997992,classroom-browser,onnx-ferplus-8-sha256-a2a2ba6a335a,2026-11-12T09:42:22Z
+6,,1,软件工程实践 · 需求分析与用例建模,计算机2301,neutral,AI,0.997987,classroom-browser,onnx-ferplus-8-sha256-a2a2ba6a335a,2026-11-12T09:42:26Z
+7,,1,软件工程实践 · 需求分析与用例建模,计算机2301,neutral,AI,0.99778,classroom-browser,onnx-ferplus-8-sha256-a2a2ba6a335a,2026-11-12T09:42:30Z
+8,,1,软件工程实践 · 需求分析与用例建模,计算机2301,surprised,AI,0.744677,classroom-browser,onnx-ferplus-8-sha256-a2a2ba6a335a,2026-11-12T09:42:41Z
+9,,1,软件工程实践 · 需求分析与用例建模,计算机2301,surprised,AI,0.905586,classroom-browser,onnx-ferplus-8-sha256-a2a2ba6a335a,2026-11-12T09:42:44Z
+10,,1,软件工程实践 · 需求分析与用例建模,计算机2301,neutral,AI,0.992488,classroom-browser,onnx-ferplus-8-sha256-a2a2ba6a335a,2026-11-12T09:42:48Z
+11,,1,软件工程实践 · 需求分析与用例建模,计算机2301,neutral,AI,0.994411,classroom-browser,onnx-ferplus-8-sha256-a2a2ba6a335a,2026-11-12T09:42:52Z

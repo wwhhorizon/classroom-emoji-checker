@@ -1,0 +1,17 @@
+﻿[Script Info]
+ScriptType: v4.00+
+PlayResX: 1440
+PlayResY: 1000
+WrapStyle: 2
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Microsoft YaHei,24,&H00FFFFFF,&H00FFFFFF,&H0010243B,&H0010243B,0,0,0,0,100,100,0,0,1,0,0,2,45,45,22,1
+Style: Title,Microsoft YaHei,18,&H00B7C8DD,&H00B7C8DD,&H0010243B,&H0010243B,0,0,0,0,100,100,0,0,1,0,0,7,28,28,912,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:28.89,Title,,0,0,0,,03  建立课程与授课关系
+Dialogue: 1,0:00:00.70,0:00:09.22,Default,,0,0,0,,管理员打开课程与课堂，新建软件工程实践，需求分析与用例建模，并选择周老师。
+Dialogue: 1,0:00:09.17,0:00:17.93,Default,,0,0,0,,用具体的课题命名，后面查看记录、筛选统计和导出时，就能清楚知道反馈对应哪节课。
+Dialogue: 1,0:00:17.93,0:00:25.42,Default,,0,0,0,,保存后，周老师可以访问这门课的课堂数据，教师的访问范围由后端检查。

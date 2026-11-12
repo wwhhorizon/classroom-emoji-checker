@@ -299,7 +299,7 @@ POST & \texttt{/api/ai/emoji-results} & 独立服务令牌回传AI结果\\
 
 \begin{figure}[H]\centering
 \includegraphics[width=.97\textwidth,height=.48\textheight,keepaspectratio]{teacher-desktop.png}
-\caption{四条人工反馈对应的教师实时看板}\end{figure}
+\caption{同一课堂中人工反馈与画面识别的教师实时看板}\end{figure}
 
 统计分析支持课程、课堂、班级、起止时间及来源筛选，同一过滤条件用于分布、趋势、课程和班级图表。管理员导出沿用过滤范围；CSV加入UTF-8 BOM，并对可能触发表格公式的单元格前缀转义。导出事件同时保留审计记录。
 
@@ -384,7 +384,7 @@ AI阈值与去重 & 低分不入库；同事件重传不重复计数 & 后端及
 会话安全 & 改密、停用、过期后HTTP与实时连接不能继续访问 & 后端及浏览器测试\\
 图片内存处理 & 大于1MB合法帧仍不创建临时上传文件 & AI代理与服务测试\\
 SQL与CSV注入 & 查询参数不能改变SQL结构；危险公式前缀转义 & 后端测试\\
-真实模型 & 无脸返回空；公开样图和视频使用实际FER+权重 & AI测试与链路记录\\
+真实模型 & 无脸返回空；授权动态素材使用实际FER+权重 & AI测试与链路记录\\
 \bottomrule\end{longtable}
 
 浏览器页面错误数为0。标签、按钮名称和页面横向溢出检查覆盖登录、教师看板、统计及手机学生页；这些检查与截图核对共同验证操作可读性。完整用例和JUnit结果随工程保存。
@@ -406,7 +406,7 @@ python -m venv .venv
 .venv\Scripts\python.exe scripts/dev.py --seed
 \end{lstlisting}
 
-MySQL 8.4的建表脚本和Compose配置已提供，三个容器分别承担数据库、业务后端和AI推理；数据库使用独立卷。当前本机未安装Docker，容器和MySQL运行验收尚未完成；实际通过的运行环境为SQLite。远程部署时应由反向代理提供HTTPS，支持WebSocket升级，并启用安全Cookie。
+MySQL 8.4的建表脚本和Compose配置已提供，三个容器分别承担数据库、业务后端和AI推理；数据库使用独立卷。当前本机未安装Docker，容器和MySQL运行验收尚未完成；实际通过的运行环境为SQLite。远程CI已触发，GitHub因账号账单问题锁定而未启动任务，不能据此宣称MySQL测试通过。远程部署时应由反向代理提供HTTPS，支持WebSocket升级，并启用安全Cookie。
 
 \subsection{测试与演示复现}
 
@@ -430,6 +430,7 @@ python scripts/record_demo.py
 
 测试中较关键的处理包括课堂名单与反馈提交的并发控制、实时连接期间的会话失效、视频帧的全程内存解析，以及人工与AI统计口径的区分。这些问题分别落实到事务、循环鉴权、输入处理和页面指标中。后续工作集中于完成MySQL容器运行验收，以及在有授权和标注的课堂样本上评估模型表现。
 
+\clearpage
 \appendix
 \section{提交材料索引}
 \begin{longtable}{p{4.5cm}p{9.65cm}}

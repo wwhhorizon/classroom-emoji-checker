@@ -20,6 +20,6 @@
 
 `source-manifest.json`包含每段原始素材的哈希、尺寸、时长、来源链接以及每0.5秒采样的全部真实FER+预测。原素材的表演标签与模型实际输出独立保留，包括未检测、低置信结果及误判。课堂环节属于演示编排，不是原数据集的采集场景；界面与视频中的“课堂场景模拟”标识用于说明这一点。
 
-素材准备可通过 `python -m ai_service.prepare_classroom_assets` 重现。该脚本下载四段官方小文件，核验哈希、转换格式并重新计算全部采样推理结果。主视频 `classroom-expressions.mp4` 的生成由项目演示制作脚本完成。
+素材准备可通过 `python -m ai_service.prepare_classroom_assets` 重现。该脚本下载四段官方小文件，核验哈希、转换格式并重新计算全部采样推理结果。执行 `python scripts/build_classroom_sample.py` 生成主视频 `classroom-expressions.mp4`：每段完整循环8秒，原始绿幕替换为绘制教室背景，保持人物表情动态，去除原声；不加入模型预测文字。合成顺序、尺寸和哈希见 `composition.json`。
 
 数据集出处：Cao H, Cooper DG, Keutmann MK, Gur RC, Nenkova A, Verma R. CREMA-D: Crowd-sourced Emotional Multimodal Actors Dataset. IEEE Transactions on Affective Computing, 2014, 5(4):377–390. DOI:10.1109/TAFFC.2014.2336244.

@@ -10,3 +10,4 @@ artifacts/
 *.toc
 *.out
 *.synctex.gz
+deliverables/latex-report/report.pdf

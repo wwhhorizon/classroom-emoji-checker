@@ -1,0 +1,10 @@
+{
+  "status": "not_started_billing_locked",
+  "run_id": 43194055777,
+  "url": "https://github.com/wwhhorizon/classroom-emoji-checker/actions/runs/43194055777",
+  "head_sha": "ee68a66ab0d217dd59f842679f2c6c86b608dea7",
+  "jobs": ["sqlite-and-ai", "mysql"],
+  "steps_executed": 0,
+  "github_annotation": "The job was not started because your account is locked due to a billing issue.",
+  "interpretation": "Neither remote job executed. Local 51-test SQLite/AI verification passed separately; MySQL remains unverified."
+}

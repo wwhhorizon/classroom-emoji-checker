@@ -1,0 +1,24 @@
+{
+  "environment": "Windows Python3.12 SQLite localhost; authenticated history 20 rows per page",
+  "scope": "Local course verification; not a production load estimate",
+  "results": {
+    "1": {
+      "requests": 100,
+      "records": 50,
+      "concurrency": 1,
+      "p50_ms": 28.5,
+      "p95_ms": 51.25,
+      "max_ms": 100.66,
+      "requests_per_second": 29.34
+    },
+    "10": {
+      "requests": 100,
+      "records": 50,
+      "concurrency": 10,
+      "p50_ms": 212.21,
+      "p95_ms": 251.57,
+      "max_ms": 281.92,
+      "requests_per_second": 46.32
+    }
+  }
+}

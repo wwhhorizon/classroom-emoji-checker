@@ -1,0 +1,18 @@
+﻿[Script Info]
+ScriptType: v4.00+
+PlayResX: 1440
+PlayResY: 1000
+WrapStyle: 2
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Microsoft YaHei,24,&H00FFFFFF,&H00FFFFFF,&H0010243B,&H0010243B,0,0,0,0,100,100,0,0,1,0,0,2,45,45,22,1
+Style: Title,Microsoft YaHei,18,&H00B7C8DD,&H00B7C8DD,&H0010243B,&H0010243B,0,0,0,0,100,100,0,0,1,0,0,7,28,28,912,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:29.82,Title,,0,0,0,,08  核对这节课的统计
+Dialogue: 1,0:00:00.70,0:00:09.78,Default,,0,0,0,,管理员选择需求分析与用例建模这门课、计算机二三零一班和本次时间范围，再应用筛选。
+Dialogue: 1,0:00:09.78,0:00:13.39,Default,,0,0,0,,结果是两位学生的四条主动反馈。
+Dialogue: 1,0:00:13.39,0:00:18.36,Default,,0,0,0,,各个表情、课程和班级汇总都对应这批实际记录。
+Dialogue: 1,0:00:18.36,0:00:26.35,Default,,0,0,0,,课堂环节在演示脚本中说明，时间趋势则使用真实提交时间，不补造过去的曲线。

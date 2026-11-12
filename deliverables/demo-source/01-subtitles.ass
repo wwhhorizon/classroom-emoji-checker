@@ -1,0 +1,18 @@
+﻿[Script Info]
+ScriptType: v4.00+
+PlayResX: 1440
+PlayResY: 1000
+WrapStyle: 2
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Microsoft YaHei,24,&H00FFFFFF,&H00FFFFFF,&H0010243B,&H0010243B,0,0,0,0,100,100,0,0,1,0,0,2,45,45,22,1
+Style: Title,Microsoft YaHei,18,&H00B7C8DD,&H00B7C8DD,&H0010243B,&H0010243B,0,0,0,0,100,100,0,0,1,0,0,7,28,28,912,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:31.02,Title,,0,0,0,,01  一节课的反馈闭环
+Dialogue: 1,0:00:00.70,0:00:08.02,Default,,0,0,0,,这次演示围绕一节软件工程实践课展开，主题是需求分析与用例建模。
+Dialogue: 1,0:00:07.97,0:00:12.15,Default,,0,0,0,,周老师授课，林予安和陈知远参与课堂。
+Dialogue: 1,0:00:12.15,0:00:22.57,Default,,0,0,0,,我们从零条表情记录开始，依次完成排课、概念讲解后的反馈、案例讨论和随堂练习，再查看统计与导出。
+Dialogue: 1,0:00:22.57,0:00:27.53,Default,,0,0,0,,学生的主动反馈和视频识别都由实际操作产生。
