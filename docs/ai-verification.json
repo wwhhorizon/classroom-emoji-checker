@@ -1,0 +1,38 @@
+{
+  "fixture_type": "Controlled 12-second video encoded from one public-domain NASA photo; not a classroom recording",
+  "source_url": "https://raw.githubusercontent.com/scikit-image/scikit-image/v0.25.2/skimage/data/astronaut.png",
+  "source_sha256": "88431cd9653ccd539741b555fb0a46b61558b301d4110412b5bc28b5e3ea6cb5",
+  "license_source": "https://github.com/scikit-image/scikit-image/blob/v0.25.2/skimage/data/_fetchers.py",
+  "video_seconds": 12,
+  "video_fps": 12,
+  "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a",
+  "image_inference": {
+    "detected": 1,
+    "results": [
+      {
+        "emoji": "happy",
+        "confidence": 0.99999,
+        "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+      }
+    ],
+    "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+  },
+  "isolated_database": "ai-integration-20261112-142621-027102.db",
+  "verified_at": "2026-11-12T06:26:32.415546Z",
+  "worker_counts": {
+    "sampled": 3,
+    "detected": 3,
+    "accepted": 3,
+    "rejected": 0,
+    "errors": 0
+  },
+  "records_before": 0,
+  "records_after": 3,
+  "persisted_record_ids": [
+    3,
+    2,
+    1
+  ],
+  "pipeline_passed": true,
+  "scope": "Integration check only; no labeled classroom evaluation or accuracy claim"
+}
