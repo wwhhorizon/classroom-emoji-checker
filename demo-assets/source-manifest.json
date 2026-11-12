@@ -1,0 +1,335 @@
+{
+  "repository": "https://github.com/CheyneyComputerScience/CREMA-D",
+  "license_database": "ODbL-1.0",
+  "license_content": "DbCL-1.0",
+  "license_url": "https://github.com/CheyneyComputerScience/CREMA-D/blob/master/LICENSE.txt",
+  "demographics_source": "https://github.com/CheyneyComputerScience/CREMA-D/blob/master/VideoDemographics.csv",
+  "actor_metadata": {
+    "dataset_actor_id": 1045,
+    "age": 22,
+    "sex": "Male",
+    "race": "Asian"
+  },
+  "selection_rule": "Same adult actor; the preselected NEU/HAP/SAD/ANG intended-expression labels, without prediction-based selection",
+  "sampling_rule": "First frame and then every 0.5 seconds in each complete clip; all samples retained",
+  "classroom_context": "Licensed facial-expression performance footage placed within a simulated classroom-stage layout; not a recording of actual students",
+  "clips": [
+    {
+      "file": "1045_IEO_NEU_XX.flv",
+      "intended_expression": "NEU",
+      "intended_emoji": "neutral",
+      "source_url": "https://github.com/CheyneyComputerScience/CREMA-D/blob/master/VideoFlash/1045_IEO_NEU_XX.flv",
+      "sha256": "56cd6745e433d4dcec7965ad6b29186647556d3ac9e9041458f6d789c7ef0f7d",
+      "original_bytes": 246859,
+      "browser_video": "demo-assets/source/1045_IEO_NEU_XX.mp4",
+      "duration_seconds": 1.969,
+      "fps": 29.97002997002997,
+      "width": 480,
+      "height": 360,
+      "samples": [
+        {
+          "seconds": 0.0,
+          "detected": 1,
+          "results": [
+            {
+              "emoji": "neutral",
+              "confidence": 0.997302,
+              "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+            }
+          ],
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        },
+        {
+          "seconds": 0.501,
+          "detected": 2,
+          "results": [
+            {
+              "emoji": "neutral",
+              "confidence": 0.998664,
+              "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+            },
+            {
+              "emoji": "neutral",
+              "confidence": 0.39103,
+              "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+            }
+          ],
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        },
+        {
+          "seconds": 1.001,
+          "detected": 1,
+          "results": [
+            {
+              "emoji": "neutral",
+              "confidence": 0.99807,
+              "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+            }
+          ],
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        },
+        {
+          "seconds": 1.502,
+          "detected": 1,
+          "results": [
+            {
+              "emoji": "neutral",
+              "confidence": 0.998674,
+              "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+            }
+          ],
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        }
+      ]
+    },
+    {
+      "file": "1045_IEO_HAP_HI.flv",
+      "intended_expression": "HAP",
+      "intended_emoji": "happy",
+      "source_url": "https://github.com/CheyneyComputerScience/CREMA-D/blob/master/VideoFlash/1045_IEO_HAP_HI.flv",
+      "sha256": "d665b2a7aee829eee87cd7d2030e2faed34b7bd17567f4edcdcb3be1bbb16226",
+      "original_bytes": 295562,
+      "browser_video": "demo-assets/source/1045_IEO_HAP_HI.mp4",
+      "duration_seconds": 2.369,
+      "fps": 29.97002997002997,
+      "width": 480,
+      "height": 360,
+      "samples": [
+        {
+          "seconds": 0.0,
+          "detected": 1,
+          "results": [
+            {
+              "emoji": "neutral",
+              "confidence": 0.918877,
+              "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+            }
+          ],
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        },
+        {
+          "seconds": 0.501,
+          "detected": 1,
+          "results": [
+            {
+              "emoji": "surprised",
+              "confidence": 0.534574,
+              "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+            }
+          ],
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        },
+        {
+          "seconds": 1.001,
+          "detected": 1,
+          "results": [
+            {
+              "emoji": "surprised",
+              "confidence": 0.623142,
+              "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+            }
+          ],
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        },
+        {
+          "seconds": 1.502,
+          "detected": 1,
+          "results": [
+            {
+              "emoji": "happy",
+              "confidence": 0.553846,
+              "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+            }
+          ],
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        },
+        {
+          "seconds": 2.002,
+          "detected": 1,
+          "results": [
+            {
+              "emoji": "happy",
+              "confidence": 0.844864,
+              "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+            }
+          ],
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        }
+      ]
+    },
+    {
+      "file": "1045_IEO_SAD_HI.flv",
+      "intended_expression": "SAD",
+      "intended_emoji": "sad",
+      "source_url": "https://github.com/CheyneyComputerScience/CREMA-D/blob/master/VideoFlash/1045_IEO_SAD_HI.flv",
+      "sha256": "52da9ecc578c5a1e3803f8391bd1b11b5721caba370ca99b6670a892adf9b34c",
+      "original_bytes": 346713,
+      "browser_video": "demo-assets/source/1045_IEO_SAD_HI.mp4",
+      "duration_seconds": 2.669,
+      "fps": 29.97002997002997,
+      "width": 480,
+      "height": 360,
+      "samples": [
+        {
+          "seconds": 0.0,
+          "detected": 1,
+          "results": [
+            {
+              "emoji": "neutral",
+              "confidence": 0.988775,
+              "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+            }
+          ],
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        },
+        {
+          "seconds": 0.501,
+          "detected": 1,
+          "results": [
+            {
+              "emoji": "neutral",
+              "confidence": 0.992136,
+              "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+            }
+          ],
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        },
+        {
+          "seconds": 1.001,
+          "detected": 1,
+          "results": [
+            {
+              "emoji": "neutral",
+              "confidence": 0.994758,
+              "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+            }
+          ],
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        },
+        {
+          "seconds": 1.502,
+          "detected": 1,
+          "results": [
+            {
+              "emoji": "neutral",
+              "confidence": 0.995196,
+              "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+            }
+          ],
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        },
+        {
+          "seconds": 2.002,
+          "detected": 1,
+          "results": [
+            {
+              "emoji": "neutral",
+              "confidence": 0.99448,
+              "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+            }
+          ],
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        },
+        {
+          "seconds": 2.502,
+          "detected": 1,
+          "results": [
+            {
+              "emoji": "neutral",
+              "confidence": 0.993497,
+              "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+            }
+          ],
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        }
+      ]
+    },
+    {
+      "file": "1045_IEO_ANG_HI.flv",
+      "intended_expression": "ANG",
+      "intended_emoji": "angry",
+      "source_url": "https://github.com/CheyneyComputerScience/CREMA-D/blob/master/VideoFlash/1045_IEO_ANG_HI.flv",
+      "sha256": "af2be85bd865701e2fbc7fd4cd1296d8ba74d43535dea4b0753e8342a319c92d",
+      "original_bytes": 345030,
+      "browser_video": "demo-assets/source/1045_IEO_ANG_HI.mp4",
+      "duration_seconds": 2.603,
+      "fps": 29.97002997002997,
+      "width": 480,
+      "height": 360,
+      "samples": [
+        {
+          "seconds": 0.0,
+          "detected": 1,
+          "results": [
+            {
+              "emoji": "neutral",
+              "confidence": 0.989908,
+              "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+            }
+          ],
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        },
+        {
+          "seconds": 0.501,
+          "detected": 1,
+          "results": [
+            {
+              "emoji": "surprised",
+              "confidence": 0.808181,
+              "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+            }
+          ],
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        },
+        {
+          "seconds": 1.001,
+          "detected": 1,
+          "results": [
+            {
+              "emoji": "surprised",
+              "confidence": 0.829595,
+              "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+            }
+          ],
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        },
+        {
+          "seconds": 1.502,
+          "detected": 1,
+          "results": [
+            {
+              "emoji": "surprised",
+              "confidence": 0.856448,
+              "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+            }
+          ],
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        },
+        {
+          "seconds": 2.002,
+          "detected": 1,
+          "results": [
+            {
+              "emoji": "surprised",
+              "confidence": 0.88994,
+              "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+            }
+          ],
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        },
+        {
+          "seconds": 2.502,
+          "detected": 1,
+          "results": [
+            {
+              "emoji": "surprised",
+              "confidence": 0.876238,
+              "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+            }
+          ],
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        }
+      ]
+    }
+  ]
+}

@@ -45,13 +45,17 @@ python -m ai_service.worker --source path/to/video.mp4 --session 1 --sample-seco
 
 独立服务在8011端口提供 `POST /infer`，使用 `Authorization: Bearer AI_SERVICE_TOKEN`，接收multipart的file字段，只支持JPEG/PNG，单帧最多2MB、800万像素。返回检测数量和各脸的emoji、confidence、model_version。没有人脸返回空数组，模型缺失或哈希错误返回503。
 
-请求流先检查总大小，再由内存MIME解析器提取文件；未调用会将大文件缓冲至临时磁盘的UploadFile接口。解码图像、采样帧及JPEG仅保留于内存，日志不输出图像、原视频、文件名或完整推理请求。后端只保存结构化结果。受控验收脚本主动生成的公开测试素材单独放在artifacts/ai-fixture，不属于运行时采集保存。
+请求流先检查总大小，再由内存MIME解析器提取文件；未调用会将大文件缓冲至临时磁盘的UploadFile接口。解码图像、采样帧及JPEG仅保留于内存，日志不输出图像、原视频、文件名或完整推理请求。后端只保存结构化结果。项目随附的授权表情素材单独放在demo-assets，用于课堂场景模拟，与运行时采集数据分开。
 
 ## 实际验证
 
 `tests/test_ai.py`覆盖七类映射、非法模型输出、图片大小与尺寸、格式错误、无脸真实推理、权重校验、令牌鉴权、模型不可用、请求格式、网络重试及回传幂等负载。实际执行结果由总测试记录汇总。
 
-公开测试素材来自scikit-image提供的NASA宇航员Eileen Collins照片，源项目标注其为公有领域。安装演示工具依赖后，`python -m ai_service.verify_pipeline --prepare-only`可核验来源图哈希，并将其编码为标记清楚的12秒H.264受控视频。该输入保留固定人脸，用于检查采样、检测、分类和回传的完整链路。运行 `python -m ai_service.verify_pipeline --session 1` 会自动创建独立测试数据库和8022后端，调用已运行的8011独立AI服务，输出 `docs/ai-verification.json`，包含采样数量、入库记录ID及时间。日常8010数据库不参与该验证。该验证不替代带人工标注的课堂测试集。
+演示采用CREMA-D官方授权的动态表情素材，选取同一22岁成年演员的Neutral、Happy、Sad、Anger四段完整表演。四段按素材标签事先确定，未根据模型输出筛选。原始FLV共约1.2MB，逐段核验官方Git LFS SHA-256后转为H.264，加入中文课程环节框架，形成 `demo-assets/classroom-expressions.mp4`。画面持续显示“课堂场景模拟”和CREMA-D素材来源。原数据库及选取子集按ODbL-1.0提供，单项内容按DbCL-1.0提供，原许可与来源说明随素材附带。
+
+`python -m ai_service.prepare_classroom_assets`可重新取得四段官方素材、校验哈希，并对每段完整视频从第0帧开始每0.5秒执行真实检测与分类。`demo-assets/source-manifest.json`保留全部检测结果，包括低置信结果及原表演标签与模型输出不一致的样本。本次原始片段检查中，Happy表演随动作变化产生neutral、surprised、happy输出，Sad表演主要识别为neutral，Anger表演主要识别为surprised；这些结果均保留。
+
+`python -m ai_service.verify_pipeline --prepare-only`检查合成视频与原素材哈希。运行 `python -m ai_service.verify_pipeline --session 1` 会自动创建独立测试数据库和8022后端，完整读取课堂场景模拟视频，调用已运行的8011独立AI服务，输出 `docs/ai-verification.json`。本次32秒、1280×720、15fps合成视频每3秒采样一次，共11帧，检测到11张人脸，9条通过0.6阈值并入库，2条被过滤，接口错误为0。9秒处surprised置信度0.575404、12秒处happy置信度0.496400均被过滤；所有逐帧类别与置信度仍保留在JSON的samples字段。日常8010数据库不参与该验证。该验证检查真实视频处理与入库链路；原素材为演员表演，未提供真实课堂识别准确率。
 
 ## 局限与偏差
 
@@ -62,4 +66,4 @@ FER+训练数据为FER人脸表情数据及众包标签，未针对本校课堂�
 - ONNX模型说明及输入输出约定：https://github.com/onnx/models/tree/main/validated/vision/body_analysis/emotion_ferplus
 - FER+原项目与MIT许可：https://github.com/microsoft/FERPlus
 - OpenCV人脸检测器：https://github.com/opencv/opencv/tree/4.x/data/haarcascades
-- 样图来源与公有领域说明：https://github.com/scikit-image/scikit-image/blob/v0.25.2/skimage/data/_fetchers.py
+- CREMA-D素材、人口元数据及许可：https://github.com/CheyneyComputerScience/CREMA-D

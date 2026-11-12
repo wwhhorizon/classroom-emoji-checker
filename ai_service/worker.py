@@ -50,7 +50,7 @@ def retry_request(client: httpx.Client, method: str, url: str, *, attempts=5, **
     raise RuntimeError('unreachable')
 
 
-def run(args) -> dict:
+def run(args, on_sample=None) -> dict:
     token = os.getenv('AI_SERVICE_TOKEN', '')
     if not token:
         raise ValueError('请在.env中配置AI_SERVICE_TOKEN')
@@ -97,6 +97,7 @@ def run(args) -> dict:
                     result = retry_request(client, 'POST', args.ai_url.rstrip('/') + '/infer',
                                            files={'file': ('frame.jpg', jpeg.tobytes(), 'image/jpeg')}).json()
                     counts['detected'] += result['detected']
+                    previous_accepted, previous_rejected = counts['accepted'], counts['rejected']
                     for face in result['results']:
                         if face['confidence'] < threshold:
                             counts['rejected'] += 1
@@ -106,10 +107,19 @@ def run(args) -> dict:
                                      event_id=str(uuid.uuid4()), model_version=face['model_version'], user_id=None)
                         saved = retry_request(client, 'POST', args.backend.rstrip('/') + '/api/ai/emoji-results', json=event).json()
                         counts['accepted' if saved.get('accepted') else 'rejected'] += 1
+                    if on_sample:
+                        on_sample({'number': counts['sampled'], 'video_seconds': round(position, 3),
+                                   'captured_at': timestamp, 'detected': result['detected'],
+                                   'results': result['results'],
+                                   'accepted': counts['accepted'] - previous_accepted,
+                                   'rejected': counts['rejected'] - previous_rejected})
                     logger.info('Sample %s: faces=%s, accepted=%s, filtered=%s',
                                 counts['sampled'], result['detected'], counts['accepted'], counts['rejected'])
                 except (httpx.HTTPError, ValueError, KeyError):
                     counts['errors'] += 1
+                    if on_sample:
+                        on_sample({'number': counts['sampled'], 'video_seconds': round(position, 3),
+                                   'captured_at': timestamp, 'error': 'inference_or_submission_failed'})
                     # Do not include response payloads, file names, frame bytes or face data in logs.
                     logger.warning('Frame inference or result submission failed after retry policy')
                 if args.max_samples and counts['sampled'] >= args.max_samples:

@@ -23,7 +23,7 @@ def main():
         if path.exists():
             with Image.open(path) as image:
                 # Crop navigation and footer so the actual interface remains readable on paper.
-                region=(235,970,image.width-20,min(image.height-40,1485)) if name=='ai-video-desktop' else (235,90,image.width-20,min(image.height-25,1025))
+                region=(255,980,image.width-30,min(image.height-70,1655)) if name=='ai-video-desktop' else (235,90,image.width-20,min(image.height-25,1025))
                 image.crop(region).save(assets/f'{name}.png')
     xml=ET.parse(ROOT/'artifacts'/'pytest-results.xml').getroot()
     suites=list(xml.iter('testsuite'))
@@ -37,7 +37,6 @@ def main():
     values={'TESTS':str(count),'FAILURES':str(failures),'SECONDS':f'{seconds:.2f}',
         'BROWSER_STAGES':str(len(browser['stages'])),'AI_FRAMES':str(ai['worker_counts']['sampled']),
         'AI_RECORDS':str(ai['records_after']),'AI_ERRORS':str(ai['worker_counts']['errors']),
-        'AI_CONFIDENCE':f"{ai['image_inference']['results'][0]['confidence']:.6f}",
         'P1':str(p1['p95_ms']),'P10':str(p10['p95_ms']),'R1':str(p1['requests_per_second']),
         'R10':str(p10['requests_per_second']),'VIDEO':video_text}
     body=REPORT
@@ -335,9 +334,9 @@ disgust & disgusted & 反感\\
 
 \subsection{真实推理链路验证}
 
-本次使用scikit-image提供的NASA宇航员公开样图，编码成带“CONTROLLED VIDEO INPUT”标记的12秒H.264短片。视频包含固定人脸，用于检查实际解码、采样、检测、分类和回传。输入为受控素材，界面显示文件名与画面，结果使用真实模型输出。
+本次围绕“软件工程实践：需求分析与用例建模”制作32秒课堂场景模拟视频。视频按课前准备、概念讲解、案例讨论和随堂练习编排，使用CREMA-D数据集同一成年演员的四段动态表情素材。原始绿幕被绘制的教室背景替换，画面明确标注“课堂场景模拟”及授权来源。各段完整循环播放，未根据模型输出挑选片段，素材来源、许可、哈希和合成步骤随工程保留。
 
-样图实际检测到一张人脸，输出happy，置信度@@AI_CONFIDENCE@@。在独立测试数据库中，worker采样@@AI_FRAMES@@帧，最终新增@@AI_RECORDS@@条AI记录，错误数为@@AI_ERRORS@@；回传字段和课堂关联均可查询。该过程验证了完整入库链路，记录保存在\texttt{docs/ai-verification.json}。
+在独立测试数据库中，worker采样@@AI_FRAMES@@帧，最终新增@@AI_RECORDS@@条AI记录，错误数为@@AI_ERRORS@@；回传字段和课堂关联均可查询。网页端另完整播放该视频并执行采样，逐条核对识别记录与CSV导出数量。该过程验证了完整入库链路，记录保存在\texttt{docs/ai-verification.json}及演示验收文件中。
 
 \begin{figure}[H]\centering
 \includegraphics[width=.97\textwidth,height=.47\textheight,keepaspectratio]{ai-video-desktop.png}
@@ -347,7 +346,7 @@ disgust & disgusted & 反感\\
 
 FER+未针对本校课堂重新训练。侧脸、低光照、遮挡、较小人脸以及不同群体的表情习惯会影响检测和分类；正面Haar检测对侧脸和口罩适应性有限。表情也不能直接等同于知识理解程度或心理状态，教师需要结合课堂提问、交流和学生主动反馈解释结果。
 
-当前受控视频只有一张固定人脸，不能用它计算真实课堂准确率。后续评估应征得参与者同意，收集不同座位、光照和姿态的标注样本，并分别报告检测率、分类结果和低置信度比例。重复采样次数也不能当成独立人数，系统为此将主动反馈、画面识别和参与学生分开展示。
+本次素材包含同一成年演员的多段表演，仍不能用它计算真实课堂准确率。逐0.5秒核验原始素材时，sad表演被模型判为neutral，anger表演多次被判为surprised；这些差异保留在素材清单中。课堂环节只是演示编排，不是情绪标签，也不能作为模型准确性的证据。后续应征得参与者同意，收集不同座位、光照和姿态的标注样本。重复采样次数不能当成独立人数，系统为此将主动反馈、画面识别和参与学生分开展示。
 
 \section{测试设计与实际结果}
 

@@ -19,13 +19,14 @@ import time
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
-from scripts.demo_story import SCENES
+from scripts.demo_story import SCENES, COURSE, CLASS_NAME
+from scripts.seed_lesson_demo import ACCOUNTS
 from scripts.fixture_server import fixture_server
 from scripts.browser_verify import login,go
 
 WORK=ROOT/'artifacts'/'demo'
 EXPORT=ROOT/'deliverables'/'demo-source'
-VIDEO=ROOT/'artifacts'/'ai-fixture'/'astronaut-controlled.mp4'
+VIDEO=ROOT/'demo-assets'/'classroom-expressions.mp4'
 
 
 def ffmpeg():
@@ -45,7 +46,8 @@ async def narrate():
     semaphore=asyncio.Semaphore(3)
     async def one(i,title,script):
         path=EXPORT/f'{i:02}-voice.mp3';bound=EXPORT/f'{i:02}-sentences.json'
-        if path.exists() and bound.exists():return
+        textpath=EXPORT/f'{i:02}-narration.txt'
+        if path.exists() and bound.exists() and textpath.exists() and textpath.read_text(encoding='utf-8')==script:return
         async with semaphore:
             for attempt in range(3):
                 try:
@@ -56,6 +58,7 @@ async def narrate():
                             if chunk['type']=='audio':f.write(chunk['data'])
                             elif chunk['type']=='SentenceBoundary':chunks.append({k:chunk[k] for k in ['offset','duration','text']})
                     bound.write_text(json.dumps(chunks,ensure_ascii=False,indent=2),encoding='utf-8')
+                    textpath.write_text(script,encoding='utf-8')
                     print('Narration',i,round(duration(path),2),flush=True)
                     return
                 except Exception:
@@ -67,7 +70,7 @@ async def narrate():
 def capture(dry=False):
     from playwright.sync_api import sync_playwright,expect
     errors=[];manifest=[];state={}
-    with fixture_server(name='demo-dry' if dry else 'demo',port=8023) as (base,password,database),sync_playwright() as p:
+    with fixture_server(name='demo-dry' if dry else 'demo',port=8023,seed_module='scripts.seed_lesson_demo') as (base,password,database),sync_playwright() as p:
         browser=p.chromium.launch()
         contexts={}
         for role in ['guest','student','student2','teacher','admin','docs']:
@@ -75,7 +78,7 @@ def capture(dry=False):
             if not dry:settings.update(record_video_dir=str(WORK/'raw'),record_video_size={'width':1440,'height':900})
             ctx=browser.new_context(**settings)
             if role in ['student','student2','teacher','admin']:
-                r=ctx.request.post(base+'/api/auth/login',headers={'X-Requested-With':'EmojiApp'},data={'username':role,'password':password})
+                r=ctx.request.post(base+'/api/auth/login',headers={'X-Requested-With':'EmojiApp'},data={'username':ACCOUNTS[role],'password':password})
                 assert r.status==200,r.text()
             contexts[role]=ctx
         # Actual pointer motion is emphasized, page data is untouched.
@@ -114,28 +117,28 @@ def capture(dry=False):
 
         scene(1,'guest',lambda page:expect(page.locator('#login-form')).to_be_visible())
         def registration(page):
-            click(page,'#show-register');fill(page,'[name=username]','课堂演示同学');fill(page,'[name=password]',password)
+            click(page,'#show-register');fill(page,'[name=username]','许沐阳');fill(page,'[name=password]',password)
             click(page,'#auth-submit');expect(page.locator('#login-form')).to_be_visible()
         scene(2,'guest',registration)
         users=contexts['admin'].request.get(base+'/api/admin/users').json();uid={u['username']:u['id'] for u in users}
         def course(page):
             ready(page);click(page,'#nav-sessions');click(page,'#new-course')
-            fill(page,'#course-form [name=name]','软件工程课堂演示')
-            page.locator('#course-form [name=teacher_id]').select_option(str(uid['teacher']))
+            fill(page,'#course-form [name=name]',COURSE)
+            page.locator('#course-form [name=teacher_id]').select_option(str(uid[ACCOUNTS['teacher']]))
             click(page,'#course-form [type=submit]');expect(page.locator('#modal')).not_to_be_visible()
         scene(3,'admin',course)
         courses=contexts['admin'].request.get(base+'/api/courses').json()
-        state['cid']=next(c['id'] for c in courses if c['name']=='软件工程课堂演示')
+        state['cid']=next(c['id'] for c in courses if c['name']==COURSE)
         def schedule(page):
             ready(page);click(page,'#nav-sessions');click(page,'#new-session')
             page.locator('#session-form [name=course_id]').select_option(str(state['cid']))
-            fill(page,'#session-form [name=class_name]','计算机2301');fill(page,'#session-form [name=room]','G2-B403')
+            fill(page,'#session-form [name=class_name]',CLASS_NAME);fill(page,'#session-form [name=room]','G2-B403')
             fill(page,'#session-form [name=start_at]',(datetime.now()-timedelta(minutes=10)).strftime('%Y-%m-%dT%H:%M'))
             fill(page,'#session-form [name=end_at]',(datetime.now()+timedelta(hours=2)).strftime('%Y-%m-%dT%H:%M'))
             click(page,'#session-form [type=submit]');expect(page.locator('#modal')).not_to_be_visible()
             state['sid']=next(s['id'] for s in contexts['admin'].request.get(base+'/api/sessions').json() if s['course_id']==state['cid'])
             click(page,f'[data-schedule="{state["sid"]}"]')
-            for name in ['student','student2']:page.locator(f'#schedule-form [name=user_ids][value="{uid[name]}"]').check()
+            for name in ['student','student2']:page.locator(f'#schedule-form [name=user_ids][value="{uid[ACCOUNTS[name]]}"]').check()
             page.wait_for_timeout(80 if dry else 1800);click(page,'#schedule-form [type=submit]')
             expect(page.locator('#modal')).not_to_be_visible()
         scene(4,'admin',schedule)
@@ -146,10 +149,13 @@ def capture(dry=False):
         def second(page):
             ready(page);choose(page);click(page,'[data-emoji=surprised]');click(page,'#send-emoji');click(page,'#nav-history')
             expect(page.locator('[data-record-id]')).to_have_count(2)
-            # Separate real UI interaction creates the second student's record.
-            other=contexts['student2'].new_page();other.goto(base);ready(other);choose(other)
-            click(other,'[data-emoji=neutral]');click(other,'#send-emoji');expect(other.locator('[data-record-id]')).to_have_count(1)
-            other.close();page.bring_to_front()
+            page.wait_for_timeout(100 if dry else 3000)
+            click(page,'#logout')
+            fill(page,'#login-form [name=username]',ACCOUNTS['student2']);fill(page,'#login-form [name=password]',password)
+            click(page,'#auth-submit');ready(page);choose(page)
+            click(page,'[data-emoji=neutral]');click(page,'#send-emoji');click(page,'#nav-history')
+            expect(page.locator('[data-record-id]')).to_have_count(1)
+            contexts['student'].request.post(base+'/api/auth/login',headers={'X-Requested-With':'EmojiApp'},data={'username':ACCOUNTS['student'],'password':password})
         scene(6,'student',second)
         def realtime(page):
             ready(page);choose(page);expect(page.locator('[data-stat=total]')).to_contain_text('3')
@@ -168,13 +174,26 @@ def capture(dry=False):
             page.locator('.secondary-charts').scroll_into_view_if_needed()
         scene(8,'admin',statistics)
         def ai(page):
+            pending=set()
+            page.on('request',lambda request:pending.add(request) if '/api/ai/frame?' in request.url else None)
+            page.on('requestfinished',lambda request:pending.discard(request))
+            page.on('requestfailed',lambda request:pending.discard(request))
             ready(page);choose(page);page.locator('.camera-section').scroll_into_view_if_needed()
-            page.locator('#local-video-file').set_input_files(str(VIDEO));expect(page.locator('#sampling-source')).to_contain_text('astronaut-controlled.mp4')
+            page.locator('#local-video-file').set_input_files(str(VIDEO));expect(page.locator('#sampling-source')).to_contain_text(VIDEO.name)
+            expect(page.locator('#camera-preview')).to_be_visible()
+            page.locator('#camera-preview').scroll_into_view_if_needed()
             expect(page.locator('#camera-result')).to_contain_text('本次保存',timeout=45000)
+            page.wait_for_timeout(100 if dry else 8500)
             page.screenshot(path=str(ROOT/'docs'/'images'/'ai-video-desktop.png'),full_page=True)
             # Keep the video visible during actual sampling; no invented labels or results.
-            page.wait_for_timeout(500 if dry else 9000)
-            if page.locator('#camera-stop').is_visible():click(page,'#camera-stop')
+            if dry:
+                page.wait_for_timeout(2500)
+                if page.locator('#camera-stop').is_visible():click(page,'#camera-stop')
+            else:
+                expect(page.locator('#camera-stop')).not_to_be_visible(timeout=45000)
+            deadline=time.monotonic()+40
+            while pending and time.monotonic()<deadline:page.wait_for_timeout(100)
+            assert not pending,'AI frame request did not complete'
             rows=contexts['admin'].request.get(base+f'/api/emoji/history?source=AI&session_id={state["sid"]}').json()
             assert rows['total']>=1,rows
             state['ai_count']=rows['total']
@@ -195,7 +214,7 @@ def capture(dry=False):
         scene(11,'admin',export)
         def audit(page):
             ready(page);click(page,'#nav-users')
-            click(page,f'[data-user-toggle="{uid["课堂演示同学"]}"]');click(page,f'[data-user-toggle="{uid["课堂演示同学"]}"]')
+            click(page,f'[data-user-toggle="{uid["许沐阳"]}"]');click(page,f'[data-user-toggle="{uid["许沐阳"]}"]')
             click(page,'#nav-audit');expect(page.locator('tbody')).to_contain_text('导出记录')
         scene(12,'admin',audit)
         def closing(page):
@@ -208,7 +227,7 @@ def capture(dry=False):
         assert result['manual']==4 and result['ai']==state['ai_count'] and result['total']==state['csv_rows']
         assert not errors,errors
         evidence={'passed':True,'scene_count':len(manifest),'page_errors':errors,'database':str(database.relative_to(ROOT)),
-            'statistics':result,'csv_rows':state['csv_rows'],'ai_input':'NASA astronaut controlled video, visibly labelled',
+            'statistics':result,'csv_rows':state['csv_rows'],'ai_input':'CREMA-D licensed expression video in a designed classroom scenario',
             'scenes':manifest}
         path=ROOT/'docs'/('demo-rehearsal.json' if dry else 'demo-verification.json')
         path.write_text(json.dumps(evidence,ensure_ascii=False,indent=2),encoding='utf-8')
@@ -267,6 +286,41 @@ def render():
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--dry-run',action='store_true');parser.add_argument('--render-only',action='store_true');parser.add_argument('--voice-only',action='store_true');args=parser.parse_args()
     WORK.mkdir(parents=True,exist_ok=True);EXPORT.mkdir(parents=True,exist_ok=True)
+    introduction='''# 中文解说演示
+
+## 课堂情境与素材
+
+围绕“软件工程实践 · 需求分析与用例建模”完整演示。计算机2301班，高新校区G2-B403教室；周老师授课，林予安和陈知远为参加学生，许沐阳演示新生注册。人物姓名均为虚构账号，课程、课堂、反馈及导出由真实浏览器操作产生。
+
+| 课堂环节 | 操作与观察 |
+|---|---|
+| 课前安排 | 管理员建立课程、当前时段课堂及两人名单；初始零表情记录 |
+| 概念讲解 | 林予安主动提交开心 |
+| 案例讨论 | 林予安提交惊讶；陈知远提交平静，并分别检查个人历史 |
+| 随堂练习 | 林予安提交低落；教师无需刷新收到第四条反馈 |
+| 课后核对 | 课程、班级、时间筛选，真实视频采样，匿名识别记录及CSV导出 |
+
+课堂环节属于讲解编排，系统不额外存储环节标签；趋势使用实际提交时间。主动反馈、AI观测与参加人数分别统计。单个表情不直接代表知识掌握程度。
+
+AI输入为 `demo-assets/classroom-expressions.mp4`，32秒，四个环节各8秒。CREMA-D授权动态表情素材以完整片段循环，绿幕替换为绘制的教室；画面明确标注课堂场景模拟及来源，没有预设识别结果。授权、原始素材、哈希及未筛选的模型结果见 `demo-assets/ATTRIBUTION.md` 和 `source-manifest.json`。
+
+## 录制与复现
+
+```powershell
+python -m pip install -r requirements-video.txt
+python -m playwright install chromium
+python -m ai_service.prepare_classroom_assets
+python scripts/build_classroom_sample.py
+python scripts/record_demo.py --dry-run
+python scripts/record_demo.py
+```
+
+后台8011推理服务需要先运行；录制脚本使用独立8023后端与新数据库，仅提前创建账号，表情记录均从零产生。中文解说与字幕、分镜屏幕原件和CSV保存在 `deliverables/demo-source/`。语音缓存依据文本检查，修改解说后会重新生成。
+
+## 分镜与解说
+
+'''
+    (ROOT/'docs'/'demo.md').write_text(introduction+'\n\n'.join(f'### {i:02} {title}\n\n{text}' for i,(title,text) in enumerate(SCENES,1))+'\n',encoding='utf-8')
     if args.render_only:render();return
     if not args.dry_run:asyncio.run(narrate())
     if args.voice_only:return

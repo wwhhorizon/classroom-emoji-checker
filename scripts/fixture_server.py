@@ -14,19 +14,20 @@ from scripts.dev import load_env
 
 
 @contextmanager
-def fixture_server(name='browser', port=8020):
+def fixture_server(name='browser', port=8020, seed_module='app.seed', existing_database=None):
     os.chdir(ROOT)
     load_env()
     with socket.socket() as sock:
         if sock.connect_ex(('127.0.0.1', port)) == 0:
             raise RuntimeError(f'Port {port} is already in use; choose an unused test port')
-    target = ROOT / 'data' / f'{name}-{datetime.now():%Y%m%d-%H%M%S-%f}.db'
+    target = Path(existing_database).resolve() if existing_database else ROOT / 'data' / f'{name}-{datetime.now():%Y%m%d-%H%M%S-%f}.db'
     target.parent.mkdir(exist_ok=True)
     env = os.environ.copy()
     env['DATABASE_URL'] = 'sqlite:///' + target.as_posix()
     env['AI_URL'] = 'http://127.0.0.1:8011'
     env['PYTHONIOENCODING'] = 'utf-8'
-    subprocess.run([sys.executable, '-m', 'app.seed'], cwd=ROOT, env=env, check=True, capture_output=True)
+    if not existing_database:
+        subprocess.run([sys.executable, '-m', seed_module], cwd=ROOT, env=env, check=True, capture_output=True)
     logpath = ROOT / 'artifacts' / f'{name}-server.log'
     logpath.parent.mkdir(exist_ok=True)
     log = logpath.open('w', encoding='utf-8')

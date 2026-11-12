@@ -1,0 +1,33 @@
+{
+  "file": "classroom-expressions.mp4",
+  "sha256": "5885978699daf503a110146c72937b9c0d532f950c7b47aa961fba5fe2baa3e5",
+  "duration_seconds": 32,
+  "width": 1280,
+  "height": 720,
+  "fps": 15,
+  "stage_seconds": 8,
+  "stages": [
+    {
+      "stage": "课前准备",
+      "task": "识别参与者，描述系统边界",
+      "source": "1045_IEO_NEU_XX.mp4"
+    },
+    {
+      "stage": "概念讲解",
+      "task": "理解参与者、目标与交互",
+      "source": "1045_IEO_HAP_HI.mp4"
+    },
+    {
+      "stage": "案例讨论",
+      "task": "分析 include 与 extend 的适用条件",
+      "source": "1045_IEO_ANG_HI.mp4"
+    },
+    {
+      "stage": "随堂练习",
+      "task": "完成选课场景，提出待澄清的问题",
+      "source": "1045_IEO_SAD_HI.mp4"
+    }
+  ],
+  "transform": "Original clips looped in full; green backdrop replaced by illustrated classroom; no prediction overlays",
+  "source_manifest": "source-manifest.json"
+}

@@ -1,38 +1,285 @@
 {
-  "fixture_type": "Controlled 12-second video encoded from one public-domain NASA photo; not a classroom recording",
-  "source_url": "https://raw.githubusercontent.com/scikit-image/scikit-image/v0.25.2/skimage/data/astronaut.png",
-  "source_sha256": "88431cd9653ccd539741b555fb0a46b61558b301d4110412b5bc28b5e3ea6cb5",
-  "license_source": "https://github.com/scikit-image/scikit-image/blob/v0.25.2/skimage/data/_fetchers.py",
-  "video_seconds": 12,
-  "video_fps": 12,
-  "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a",
-  "image_inference": {
-    "detected": 1,
-    "results": [
-      {
-        "emoji": "happy",
-        "confidence": 0.99999,
-        "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
-      }
-    ],
-    "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+  "fixture_type": "Classroom-stage simulation using four officially licensed CREMA-D adult-actor performance clips; not a recording of actual students",
+  "video": "demo-assets/classroom-expressions.mp4",
+  "video_sha256": "5885978699daf503a110146c72937b9c0d532f950c7b47aa961fba5fe2baa3e5",
+  "source_manifest": "demo-assets/source-manifest.json",
+  "source_repository": "https://github.com/CheyneyComputerScience/CREMA-D",
+  "source_license": {
+    "database": "ODbL-1.0",
+    "content": "DbCL-1.0"
   },
-  "isolated_database": "ai-integration-20261112-142621-027102.db",
-  "verified_at": "2026-11-12T06:26:32.415546Z",
+  "video_seconds": 32.0,
+  "video_fps": 15.0,
+  "width": 1280,
+  "height": 720,
+  "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a",
+  "selection_rule": "Same adult actor; the preselected NEU/HAP/SAD/ANG intended-expression labels, without prediction-based selection",
+  "source_clip_sampling": "Every 0.5 seconds of each complete raw clip, without filtering; exact predictions retained in source-manifest.json",
+  "isolated_database": "ai-integration-20261112-173346-163782.db",
+  "verified_at": "2026-11-12T09:33:54.539343Z",
+  "sample_seconds": 3,
+  "threshold": 0.6,
   "worker_counts": {
-    "sampled": 3,
-    "detected": 3,
-    "accepted": 3,
-    "rejected": 0,
+    "sampled": 11,
+    "detected": 11,
+    "accepted": 9,
+    "rejected": 2,
     "errors": 0
   },
   "records_before": 0,
-  "records_after": 3,
+  "records_after": 9,
+  "samples": [
+    {
+      "number": 1,
+      "video_seconds": 0.0,
+      "captured_at": "2026-11-12T09:33:52.655675Z",
+      "detected": 1,
+      "results": [
+        {
+          "emoji": "neutral",
+          "confidence": 0.998454,
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        }
+      ],
+      "accepted": 1,
+      "rejected": 0
+    },
+    {
+      "number": 2,
+      "video_seconds": 3.0,
+      "captured_at": "2026-11-12T09:33:52.842964Z",
+      "detected": 1,
+      "results": [
+        {
+          "emoji": "neutral",
+          "confidence": 0.998011,
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        }
+      ],
+      "accepted": 1,
+      "rejected": 0
+    },
+    {
+      "number": 3,
+      "video_seconds": 6.0,
+      "captured_at": "2026-11-12T09:33:53.035833Z",
+      "detected": 1,
+      "results": [
+        {
+          "emoji": "neutral",
+          "confidence": 0.997868,
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        }
+      ],
+      "accepted": 1,
+      "rejected": 0
+    },
+    {
+      "number": 4,
+      "video_seconds": 9.0,
+      "captured_at": "2026-11-12T09:33:53.205676Z",
+      "detected": 1,
+      "results": [
+        {
+          "emoji": "surprised",
+          "confidence": 0.575404,
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        }
+      ],
+      "accepted": 0,
+      "rejected": 1
+    },
+    {
+      "number": 5,
+      "video_seconds": 12.0,
+      "captured_at": "2026-11-12T09:33:53.346625Z",
+      "detected": 1,
+      "results": [
+        {
+          "emoji": "happy",
+          "confidence": 0.4964,
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        }
+      ],
+      "accepted": 0,
+      "rejected": 1
+    },
+    {
+      "number": 6,
+      "video_seconds": 15.0,
+      "captured_at": "2026-11-12T09:33:53.455754Z",
+      "detected": 1,
+      "results": [
+        {
+          "emoji": "happy",
+          "confidence": 0.909501,
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        }
+      ],
+      "accepted": 1,
+      "rejected": 0
+    },
+    {
+      "number": 7,
+      "video_seconds": 18.0,
+      "captured_at": "2026-11-12T09:33:53.611058Z",
+      "detected": 1,
+      "results": [
+        {
+          "emoji": "surprised",
+          "confidence": 0.899213,
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        }
+      ],
+      "accepted": 1,
+      "rejected": 0
+    },
+    {
+      "number": 8,
+      "video_seconds": 21.0,
+      "captured_at": "2026-11-12T09:33:53.814706Z",
+      "detected": 1,
+      "results": [
+        {
+          "emoji": "surprised",
+          "confidence": 0.890009,
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        }
+      ],
+      "accepted": 1,
+      "rejected": 0
+    },
+    {
+      "number": 9,
+      "video_seconds": 24.0,
+      "captured_at": "2026-11-12T09:33:53.986139Z",
+      "detected": 1,
+      "results": [
+        {
+          "emoji": "neutral",
+          "confidence": 0.992979,
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        }
+      ],
+      "accepted": 1,
+      "rejected": 0
+    },
+    {
+      "number": 10,
+      "video_seconds": 27.0,
+      "captured_at": "2026-11-12T09:33:54.137928Z",
+      "detected": 1,
+      "results": [
+        {
+          "emoji": "neutral",
+          "confidence": 0.992188,
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        }
+      ],
+      "accepted": 1,
+      "rejected": 0
+    },
+    {
+      "number": 11,
+      "video_seconds": 30.0,
+      "captured_at": "2026-11-12T09:33:54.362565Z",
+      "detected": 1,
+      "results": [
+        {
+          "emoji": "neutral",
+          "confidence": 0.99373,
+          "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+        }
+      ],
+      "accepted": 1,
+      "rejected": 0
+    }
+  ],
   "persisted_record_ids": [
+    9,
+    8,
+    7,
+    6,
+    5,
+    4,
     3,
     2,
     1
   ],
+  "persisted_records": [
+    {
+      "id": 9,
+      "emoji": "neutral",
+      "confidence": 0.99373,
+      "timestamp": "2026-11-12T09:33:54Z",
+      "device_id": "classroom-expression-simulation",
+      "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+    },
+    {
+      "id": 8,
+      "emoji": "neutral",
+      "confidence": 0.992188,
+      "timestamp": "2026-11-12T09:33:54Z",
+      "device_id": "classroom-expression-simulation",
+      "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+    },
+    {
+      "id": 7,
+      "emoji": "neutral",
+      "confidence": 0.992979,
+      "timestamp": "2026-11-12T09:33:53Z",
+      "device_id": "classroom-expression-simulation",
+      "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+    },
+    {
+      "id": 6,
+      "emoji": "surprised",
+      "confidence": 0.890009,
+      "timestamp": "2026-11-12T09:33:53Z",
+      "device_id": "classroom-expression-simulation",
+      "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+    },
+    {
+      "id": 5,
+      "emoji": "surprised",
+      "confidence": 0.899213,
+      "timestamp": "2026-11-12T09:33:53Z",
+      "device_id": "classroom-expression-simulation",
+      "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+    },
+    {
+      "id": 4,
+      "emoji": "happy",
+      "confidence": 0.909501,
+      "timestamp": "2026-11-12T09:33:53Z",
+      "device_id": "classroom-expression-simulation",
+      "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+    },
+    {
+      "id": 3,
+      "emoji": "neutral",
+      "confidence": 0.997868,
+      "timestamp": "2026-11-12T09:33:53Z",
+      "device_id": "classroom-expression-simulation",
+      "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+    },
+    {
+      "id": 2,
+      "emoji": "neutral",
+      "confidence": 0.998011,
+      "timestamp": "2026-11-12T09:33:52Z",
+      "device_id": "classroom-expression-simulation",
+      "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+    },
+    {
+      "id": 1,
+      "emoji": "neutral",
+      "confidence": 0.998454,
+      "timestamp": "2026-11-12T09:33:52Z",
+      "device_id": "classroom-expression-simulation",
+      "model_version": "onnx-ferplus-8-sha256-a2a2ba6a335a"
+    }
+  ],
   "pipeline_passed": true,
-  "scope": "Integration check only; no labeled classroom evaluation or accuracy claim"
+  "scope": "Integration check on attributed expression performances in a classroom simulation; no classroom recognition accuracy claim"
 }
