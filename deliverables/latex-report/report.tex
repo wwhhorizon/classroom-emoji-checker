@@ -165,17 +165,15 @@ AI采样用例由教师或管理员主动开始，视频帧经过独立推理服
 \texttt{ai\_service/} & 模型、独立API、采样worker、下载与验证\\
 \bottomrule\end{tabularx}\end{table}
 
-\clearpage
 \section{数据模型与接口契约}
 
 \subsection{关系实体}
 
-系统包含七个实体。课程、课堂和名单组织教学安排，表情记录关联课堂及用户，登录会话与操作审计分别关联用户。图中采用乌鸦脚表示法标注基数。
+Course关联授课教师；ClassSession描述某次具体课堂；ScheduleUser连接课堂与学生；EmojiRecord保存人工或AI结果。LoginSession保存会话摘要，AuditLog保存关键操作。
 
 \begin{figure}[H]\centering
-\includegraphics[width=\textwidth,height=.76\textheight,keepaspectratio]{database-er.pdf}
-\caption{数据库实体关系、键约束与关联基数}\end{figure}
-\clearpage
+\includegraphics[width=\textwidth,height=.43\textheight,keepaspectratio]{database-er.pdf}
+\caption{核心实体关系及辅助实体}\end{figure}
 
 User的用户名唯一，角色限定为student、teacher和admin。ScheduleUser对课堂与学生建立组合唯一约束。EmojiRecord的emoji和source有枚举检查，置信度限定在0至1之间，AI记录必须有置信度，人工记录必须有关联学生。event\_id建立唯一约束，防止网络重试重复写入。
 

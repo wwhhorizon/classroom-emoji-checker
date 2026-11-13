@@ -1,210 +1,55 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1210" viewBox="0 0 1000 1210">
-<title>课堂表情系统数据库 ER 图</title>
-<desc>七个实体及八组外键关系，标注主键、外键、唯一键、可空字段和关系基数。</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="635" viewBox="0 0 1000 635">
+<title>课堂表情系统核心实体关系图</title>
 <rect width="100%" height="100%" fill="white"/>
-<text x="40" y="38" font-family="SimHei, sans-serif" font-size="29" text-anchor="start" fill="#173955">课堂表情系统数据库 ER 图</text>
-<text x="40" y="65" font-family="SimSun, serif" font-size="18" text-anchor="start" fill="#62758A">核心业务、登录会话与操作审计</text>
-<polyline points="165,375 165,261" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="157,366 173,366" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="157,354 173,354" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="173,266 165,279" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="165,266 165,279" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="157,266 165,279" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<circle cx="165" cy="290" r="4.5" fill="white" stroke="#64829F" stroke-width="1.9"/>
-<polyline points="290,425 332.5,425 332.5,197 375,197" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="299,417 299,433" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="311,417 311,433" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="370,205 357,197" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="370,197 357,197" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="370,189 357,197" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<circle cx="346" cy="197" r="4.5" fill="white" stroke="#64829F" stroke-width="1.9"/>
-<polyline points="625,197 667.5,197 667.5,425 710,425" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="634,189 634,205" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="646,189 646,205" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="705,433 692,425" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="705,425 692,425" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="705,417 692,425" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<circle cx="681" cy="425" r="4.5" fill="white" stroke="#64829F" stroke-width="1.9"/>
-<polyline points="290,555 375,555" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="299,547 299,563" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="311,547 311,563" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="370,563 357,555" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="370,555 357,555" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="370,547 357,555" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<circle cx="346" cy="555" r="4.5" fill="white" stroke="#64829F" stroke-width="1.9"/>
-<polyline points="710,555 625,555" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="701,563 701,547" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="689,563 689,547" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="630,547 643,555" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="630,555 643,555" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="630,563 643,555" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<circle cx="654" cy="555" r="4.5" fill="white" stroke="#64829F" stroke-width="1.9"/>
-<polyline points="290,625 332.5,625 332.5,950 375,950" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="299,617 299,633" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<circle cx="315" cy="625" r="4.5" fill="white" stroke="#64829F" stroke-width="1.9"/>
-<polyline points="370,958 357,950" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="370,950 357,950" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="370,942 357,950" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<circle cx="346" cy="950" r="4.5" fill="white" stroke="#64829F" stroke-width="1.9"/>
-<polyline points="710,625 667.5,625 667.5,950 625,950" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="701,633 701,617" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="689,633 689,617" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="630,942 643,950" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="630,950 643,950" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="630,958 643,950" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<circle cx="654" cy="950" r="4.5" fill="white" stroke="#64829F" stroke-width="1.9"/>
-<polyline points="165,644 165,800" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="173,653 157,653" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<circle cx="165" cy="669" r="4.5" fill="white" stroke="#64829F" stroke-width="1.9"/>
-<polyline points="157,795 165,782" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="165,795 165,782" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="173,795 165,782" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<circle cx="165" cy="771" r="4.5" fill="white" stroke="#64829F" stroke-width="1.9"/>
-<rect x="40" y="100" width="250" height="161" rx="7" fill="white" stroke="#CBD7E3" stroke-width="1.25"/>
-<rect x="41" y="101" width="248" height="61" rx="6" fill="#EDF3F9" stroke="none" stroke-width="1.25"/>
-<rect x="41" y="148" width="248" height="14" rx="0" fill="#EDF3F9" stroke="none" stroke-width="1.25"/>
-<text x="56" y="127" font-family="Consolas, monospace" font-size="24" text-anchor="start" fill="#255A94">LoginSession</text>
-<text x="56" y="150" font-family="SimHei, sans-serif" font-size="18" text-anchor="start" fill="#62758A">登录会话</text>
-<text x="56" y="186" font-family="Consolas, monospace" font-size="15" text-anchor="start" fill="#255A94">PK</text>
-<text x="98" y="186" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">token_hash</text>
-<rect x="41" y="193" width="248" height="27" rx="0" fill="#F7F9FC" stroke="none" stroke-width="1.25"/>
-<text x="56" y="213" font-family="Consolas, monospace" font-size="15" text-anchor="start" fill="#255A94">FK</text>
-<text x="98" y="213" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">user_id</text>
-<text x="98" y="240" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">expires</text>
-<rect x="375" y="100" width="250" height="191" rx="7" fill="white" stroke="#CBD7E3" stroke-width="1.25"/>
-<rect x="376" y="101" width="248" height="61" rx="6" fill="#EDF3F9" stroke="none" stroke-width="1.25"/>
-<rect x="376" y="148" width="248" height="14" rx="0" fill="#EDF3F9" stroke="none" stroke-width="1.25"/>
-<text x="391" y="127" font-family="Consolas, monospace" font-size="24" text-anchor="start" fill="#255A94">Course</text>
-<text x="391" y="150" font-family="SimHei, sans-serif" font-size="18" text-anchor="start" fill="#62758A">课程</text>
-<text x="391" y="186" font-family="Consolas, monospace" font-size="15" text-anchor="start" fill="#255A94">PK</text>
-<text x="433" y="186" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">id</text>
-<rect x="376" y="193" width="248" height="27" rx="0" fill="#F7F9FC" stroke="none" stroke-width="1.25"/>
-<text x="433" y="213" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">name</text>
-<text x="391" y="240" font-family="Consolas, monospace" font-size="15" text-anchor="start" fill="#255A94">FK</text>
-<text x="433" y="240" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">teacher_id</text>
-<polyline points="390,256 610,256" fill="none" stroke="#CBD7E3" stroke-width="1" stroke-linejoin="round"/>
-<text x="391" y="278" font-family="Consolas, monospace" font-size="15" text-anchor="start" fill="#62758A">UK (name, teacher_id)</text>
-<rect x="40" y="375" width="250" height="269" rx="7" fill="white" stroke="#CBD7E3" stroke-width="1.25"/>
-<rect x="41" y="376" width="248" height="61" rx="6" fill="#EDF3F9" stroke="none" stroke-width="1.25"/>
-<rect x="41" y="423" width="248" height="14" rx="0" fill="#EDF3F9" stroke="none" stroke-width="1.25"/>
-<text x="56" y="402" font-family="Consolas, monospace" font-size="24" text-anchor="start" fill="#255A94">User</text>
-<text x="56" y="425" font-family="SimHei, sans-serif" font-size="18" text-anchor="start" fill="#62758A">用户</text>
-<text x="56" y="461" font-family="Consolas, monospace" font-size="15" text-anchor="start" fill="#255A94">PK</text>
-<text x="98" y="461" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">id</text>
-<rect x="41" y="468" width="248" height="27" rx="0" fill="#F7F9FC" stroke="none" stroke-width="1.25"/>
-<text x="56" y="488" font-family="Consolas, monospace" font-size="15" text-anchor="start" fill="#255A94">UK</text>
-<text x="98" y="488" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">username</text>
-<text x="98" y="515" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">password_hash</text>
-<rect x="41" y="522" width="248" height="27" rx="0" fill="#F7F9FC" stroke="none" stroke-width="1.25"/>
-<text x="98" y="542" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">role</text>
-<text x="98" y="569" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">email</text>
-<rect x="41" y="576" width="248" height="27" rx="0" fill="#F7F9FC" stroke="none" stroke-width="1.25"/>
-<text x="98" y="596" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">active</text>
-<text x="98" y="623" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">created_at</text>
-<rect x="710" y="375" width="250" height="269" rx="7" fill="white" stroke="#CBD7E3" stroke-width="1.25"/>
-<rect x="711" y="376" width="248" height="61" rx="6" fill="#EDF3F9" stroke="none" stroke-width="1.25"/>
-<rect x="711" y="423" width="248" height="14" rx="0" fill="#EDF3F9" stroke="none" stroke-width="1.25"/>
-<text x="726" y="402" font-family="Consolas, monospace" font-size="24" text-anchor="start" fill="#255A94">ClassSession</text>
-<text x="726" y="425" font-family="SimHei, sans-serif" font-size="18" text-anchor="start" fill="#62758A">课堂会话</text>
-<text x="726" y="461" font-family="Consolas, monospace" font-size="15" text-anchor="start" fill="#255A94">PK</text>
-<text x="768" y="461" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">id</text>
-<rect x="711" y="468" width="248" height="27" rx="0" fill="#F7F9FC" stroke="none" stroke-width="1.25"/>
-<text x="726" y="488" font-family="Consolas, monospace" font-size="15" text-anchor="start" fill="#255A94">FK</text>
-<text x="768" y="488" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">course_id</text>
-<text x="768" y="515" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">class_name</text>
-<rect x="711" y="522" width="248" height="27" rx="0" fill="#F7F9FC" stroke="none" stroke-width="1.25"/>
-<text x="768" y="542" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">room</text>
-<text x="768" y="569" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">start_at</text>
-<rect x="711" y="576" width="248" height="27" rx="0" fill="#F7F9FC" stroke="none" stroke-width="1.25"/>
-<text x="768" y="596" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">end_at</text>
-<text x="768" y="623" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">version</text>
-<rect x="375" y="430" width="250" height="218" rx="7" fill="white" stroke="#CBD7E3" stroke-width="1.25"/>
-<rect x="376" y="431" width="248" height="61" rx="6" fill="#EDF3F9" stroke="none" stroke-width="1.25"/>
-<rect x="376" y="478" width="248" height="14" rx="0" fill="#EDF3F9" stroke="none" stroke-width="1.25"/>
-<text x="391" y="457" font-family="Consolas, monospace" font-size="24" text-anchor="start" fill="#255A94">ScheduleUser</text>
-<text x="391" y="480" font-family="SimHei, sans-serif" font-size="18" text-anchor="start" fill="#62758A">课堂名单</text>
-<text x="391" y="516" font-family="Consolas, monospace" font-size="15" text-anchor="start" fill="#255A94">PK</text>
-<text x="433" y="516" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">id</text>
-<rect x="376" y="523" width="248" height="27" rx="0" fill="#F7F9FC" stroke="none" stroke-width="1.25"/>
-<text x="391" y="543" font-family="Consolas, monospace" font-size="15" text-anchor="start" fill="#255A94">FK</text>
-<text x="433" y="543" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">session_id</text>
-<text x="391" y="570" font-family="Consolas, monospace" font-size="15" text-anchor="start" fill="#255A94">FK</text>
-<text x="433" y="570" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">user_id</text>
-<rect x="376" y="577" width="248" height="27" rx="0" fill="#F7F9FC" stroke="none" stroke-width="1.25"/>
-<text x="433" y="597" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">scheduled_at</text>
-<polyline points="390,613 610,613" fill="none" stroke="#CBD7E3" stroke-width="1" stroke-linejoin="round"/>
-<text x="391" y="635" font-family="Consolas, monospace" font-size="15" text-anchor="start" fill="#62758A">UK (session_id, user_id)</text>
-<rect x="375" y="770" width="250" height="350" rx="7" fill="white" stroke="#CBD7E3" stroke-width="1.25"/>
-<rect x="376" y="771" width="248" height="61" rx="6" fill="#EDF3F9" stroke="none" stroke-width="1.25"/>
-<rect x="376" y="818" width="248" height="14" rx="0" fill="#EDF3F9" stroke="none" stroke-width="1.25"/>
-<text x="391" y="797" font-family="Consolas, monospace" font-size="24" text-anchor="start" fill="#255A94">EmojiRecord</text>
-<text x="391" y="820" font-family="SimHei, sans-serif" font-size="18" text-anchor="start" fill="#62758A">表情记录</text>
-<text x="391" y="856" font-family="Consolas, monospace" font-size="15" text-anchor="start" fill="#255A94">PK</text>
-<text x="433" y="856" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">id</text>
-<rect x="376" y="863" width="248" height="27" rx="0" fill="#F7F9FC" stroke="none" stroke-width="1.25"/>
-<text x="391" y="883" font-family="Consolas, monospace" font-size="15" text-anchor="start" fill="#255A94">FK</text>
-<text x="433" y="883" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">session_id</text>
-<text x="391" y="910" font-family="Consolas, monospace" font-size="15" text-anchor="start" fill="#255A94">FK</text>
-<text x="433" y="910" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">user_id</text>
-<text x="612" y="910" font-family="Consolas, monospace" font-size="12" text-anchor="end" fill="#62758A">NULL</text>
-<rect x="376" y="917" width="248" height="27" rx="0" fill="#F7F9FC" stroke="none" stroke-width="1.25"/>
-<text x="433" y="937" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">emoji</text>
-<text x="433" y="964" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">source</text>
-<rect x="376" y="971" width="248" height="27" rx="0" fill="#F7F9FC" stroke="none" stroke-width="1.25"/>
-<text x="433" y="991" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">confidence</text>
-<text x="612" y="991" font-family="Consolas, monospace" font-size="12" text-anchor="end" fill="#62758A">NULL</text>
-<text x="433" y="1018" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">timestamp</text>
-<rect x="376" y="1025" width="248" height="27" rx="0" fill="#F7F9FC" stroke="none" stroke-width="1.25"/>
-<text x="433" y="1045" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">device_id</text>
-<text x="433" y="1072" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">model_version</text>
-<rect x="376" y="1079" width="248" height="27" rx="0" fill="#F7F9FC" stroke="none" stroke-width="1.25"/>
-<text x="391" y="1099" font-family="Consolas, monospace" font-size="15" text-anchor="start" fill="#255A94">UK</text>
-<text x="433" y="1099" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">event_id</text>
-<text x="612" y="1099" font-family="Consolas, monospace" font-size="12" text-anchor="end" fill="#62758A">NULL</text>
-<rect x="40" y="800" width="250" height="215" rx="7" fill="white" stroke="#CBD7E3" stroke-width="1.25"/>
-<rect x="41" y="801" width="248" height="61" rx="6" fill="#EDF3F9" stroke="none" stroke-width="1.25"/>
-<rect x="41" y="848" width="248" height="14" rx="0" fill="#EDF3F9" stroke="none" stroke-width="1.25"/>
-<text x="56" y="827" font-family="Consolas, monospace" font-size="24" text-anchor="start" fill="#255A94">AuditLog</text>
-<text x="56" y="850" font-family="SimHei, sans-serif" font-size="18" text-anchor="start" fill="#62758A">操作审计</text>
-<text x="56" y="886" font-family="Consolas, monospace" font-size="15" text-anchor="start" fill="#255A94">PK</text>
-<text x="98" y="886" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">id</text>
-<rect x="41" y="893" width="248" height="27" rx="0" fill="#F7F9FC" stroke="none" stroke-width="1.25"/>
-<text x="56" y="913" font-family="Consolas, monospace" font-size="15" text-anchor="start" fill="#255A94">FK</text>
-<text x="98" y="913" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">actor_id</text>
-<text x="277" y="913" font-family="Consolas, monospace" font-size="12" text-anchor="end" fill="#62758A">NULL</text>
-<text x="98" y="940" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">action</text>
-<rect x="41" y="947" width="248" height="27" rx="0" fill="#F7F9FC" stroke="none" stroke-width="1.25"/>
-<text x="98" y="967" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">detail</text>
-<text x="98" y="994" font-family="Consolas, monospace" font-size="20" text-anchor="start" fill="#173955">created_at</text>
-<text x="180" y="325" font-family="SimSun, serif" font-size="17" text-anchor="start" fill="#62758A">登录会话</text>
-<text x="325" y="310" font-family="SimSun, serif" font-size="17" text-anchor="middle" fill="#62758A" transform="rotate(-90 325 310)">授课</text>
-<text x="660" y="310" font-family="SimSun, serif" font-size="17" text-anchor="middle" fill="#62758A" transform="rotate(-90 660 310)">开设课堂</text>
-<text x="332.5" y="538" font-family="SimSun, serif" font-size="16" text-anchor="middle" fill="#62758A">参加</text>
-<text x="667.5" y="538" font-family="SimSun, serif" font-size="16" text-anchor="middle" fill="#62758A">安排</text>
-<text x="325" y="775" font-family="SimSun, serif" font-size="17" text-anchor="middle" fill="#62758A" transform="rotate(-90 325 775)">提交 / 关联</text>
-<text x="660" y="775" font-family="SimSun, serif" font-size="17" text-anchor="middle" fill="#62758A" transform="rotate(-90 660 775)">收集</text>
-<text x="180" y="727" font-family="SimSun, serif" font-size="17" text-anchor="start" fill="#62758A">操作审计</text>
-<text x="710" y="816" font-family="SimHei, sans-serif" font-size="21" text-anchor="start" fill="#173955">读图说明</text>
-<polyline points="710,831 960,831" fill="none" stroke="#CBD7E3" stroke-width="1" stroke-linejoin="round"/>
-<text x="710" y="858" font-family="SimSun, serif" font-size="17" text-anchor="start" fill="#62758A">PK 主键    FK 外键</text>
-<text x="710" y="884" font-family="SimSun, serif" font-size="17" text-anchor="start" fill="#62758A">UK 唯一键   NULL 可为空</text>
-<polyline points="714,923 771,923" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="723,915 723,931" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="735,915 735,931" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<text x="788" y="929" font-family="SimSun, serif" font-size="18" text-anchor="start" fill="#62758A">必须一个</text>
-<polyline points="714,963 771,963" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="723,955 723,971" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<circle cx="739" cy="963" r="4.5" fill="white" stroke="#64829F" stroke-width="1.9"/>
-<text x="788" y="969" font-family="SimSun, serif" font-size="18" text-anchor="start" fill="#62758A">可选一个</text>
-<polyline points="714,1003 771,1003" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="719,995 732,1003" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="719,1003 732,1003" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<polyline points="719,1011 732,1003" fill="none" stroke="#64829F" stroke-width="1.9" stroke-linejoin="round"/>
-<circle cx="743" cy="1003" r="4.5" fill="white" stroke="#64829F" stroke-width="1.9"/>
-<text x="788" y="1009" font-family="SimSun, serif" font-size="18" text-anchor="start" fill="#62758A">零到多个</text>
-<text x="710" y="1051" font-family="SimSun, serif" font-size="16" text-anchor="start" fill="#62758A">人工记录：user_id 非空</text>
-<text x="710" y="1077" font-family="SimSun, serif" font-size="16" text-anchor="start" fill="#62758A">AI 记录：confidence 非空</text>
-<text x="710" y="1103" font-family="SimSun, serif" font-size="16" text-anchor="start" fill="#62758A">默认匿名 AI：user_id 为空</text>
-<polyline points="40,1151 960,1151" fill="none" stroke="#CBD7E3" stroke-width="1" stroke-linejoin="round"/>
-<text x="40" y="1178" font-family="SimSun, serif" font-size="17" text-anchor="start" fill="#62758A">实体与外键对应 app/models.py；列类型及检查约束见 database/schema.sql。</text>
+<polyline points="300,245 330,245 330,90 365,90" fill="none" stroke="#64829F" stroke-width="1.8"/>
+<polyline points="635,90 670,90 670,245 700,245" fill="none" stroke="#64829F" stroke-width="1.8"/>
+<polyline points="300,285 365,285" fill="none" stroke="#64829F" stroke-width="1.8"/>
+<polyline points="700,285 635,285" fill="none" stroke="#64829F" stroke-width="1.8"/>
+<polyline points="300,320 330,320 330,515 365,515" fill="none" stroke="#64829F" stroke-width="1.8"/>
+<polyline points="700,320 670,320 670,515 635,515" fill="none" stroke="#64829F" stroke-width="1.8"/>
+<polyline points="165,340 165,450" fill="none" stroke="#64829F" stroke-width="1.8"/>
+<rect x="30" y="210" width="270" height="130" rx="5" fill="white" stroke="#CBD7E3"/>
+<rect x="31" y="211" width="268" height="55" fill="#EDF3F9"/>
+<text x="45" y="235" font-family="Consolas, monospace" font-size="23" text-anchor="start" fill="#173955">User</text>
+<text x="45" y="257" font-family="SimSun, serif" font-size="18" text-anchor="start" fill="#173955">用户</text>
+<text x="45" y="293" font-family="Consolas, monospace" font-size="17" text-anchor="start" fill="#173955">id, username, role</text>
+<text x="45" y="318" font-family="Consolas, monospace" font-size="17" text-anchor="start" fill="#173955">password_hash, active</text>
+<rect x="365" y="25" width="270" height="130" rx="5" fill="white" stroke="#CBD7E3"/>
+<rect x="366" y="26" width="268" height="55" fill="#EDF3F9"/>
+<text x="380" y="50" font-family="Consolas, monospace" font-size="23" text-anchor="start" fill="#173955">Course</text>
+<text x="380" y="72" font-family="SimSun, serif" font-size="18" text-anchor="start" fill="#173955">课程</text>
+<text x="380" y="108" font-family="Consolas, monospace" font-size="17" text-anchor="start" fill="#173955">id, name</text>
+<text x="380" y="133" font-family="Consolas, monospace" font-size="17" text-anchor="start" fill="#173955">teacher_id</text>
+<rect x="700" y="210" width="270" height="130" rx="5" fill="white" stroke="#CBD7E3"/>
+<rect x="701" y="211" width="268" height="55" fill="#EDF3F9"/>
+<text x="715" y="235" font-family="Consolas, monospace" font-size="23" text-anchor="start" fill="#173955">ClassSession</text>
+<text x="715" y="257" font-family="SimSun, serif" font-size="18" text-anchor="start" fill="#173955">课堂</text>
+<text x="715" y="293" font-family="Consolas, monospace" font-size="17" text-anchor="start" fill="#173955">id, course_id</text>
+<text x="715" y="318" font-family="Consolas, monospace" font-size="17" text-anchor="start" fill="#173955">start_at, end_at, version</text>
+<rect x="365" y="210" width="270" height="130" rx="5" fill="white" stroke="#CBD7E3"/>
+<rect x="366" y="211" width="268" height="55" fill="#EDF3F9"/>
+<text x="380" y="235" font-family="Consolas, monospace" font-size="23" text-anchor="start" fill="#173955">ScheduleUser</text>
+<text x="380" y="257" font-family="SimSun, serif" font-size="18" text-anchor="start" fill="#173955">课堂名单</text>
+<text x="380" y="293" font-family="Consolas, monospace" font-size="17" text-anchor="start" fill="#173955">session_id, user_id</text>
+<text x="380" y="318" font-family="Consolas, monospace" font-size="17" text-anchor="start" fill="#173955">scheduled_at</text>
+<rect x="365" y="450" width="270" height="155" rx="5" fill="white" stroke="#CBD7E3"/>
+<rect x="366" y="451" width="268" height="55" fill="#EDF3F9"/>
+<text x="380" y="475" font-family="Consolas, monospace" font-size="23" text-anchor="start" fill="#173955">EmojiRecord</text>
+<text x="380" y="497" font-family="SimSun, serif" font-size="18" text-anchor="start" fill="#173955">表情记录</text>
+<text x="380" y="533" font-family="Consolas, monospace" font-size="17" text-anchor="start" fill="#173955">session_id, user_id?</text>
+<text x="380" y="558" font-family="Consolas, monospace" font-size="17" text-anchor="start" fill="#173955">emoji, source, confidence</text>
+<text x="380" y="583" font-family="Consolas, monospace" font-size="17" text-anchor="start" fill="#173955">timestamp, event_id</text>
+<rect x="30" y="450" width="270" height="130" rx="5" fill="white" stroke="#CBD7E3"/>
+<rect x="31" y="451" width="268" height="55" fill="#EDF3F9"/>
+<text x="45" y="475" font-family="SimHei, sans-serif" font-size="23" text-anchor="start" fill="#173955">会话与审计</text>
+<text x="45" y="497" font-family="SimSun, serif" font-size="18" text-anchor="start" fill="#173955">辅助实体</text>
+<text x="45" y="533" font-family="Consolas, monospace" font-size="17" text-anchor="start" fill="#173955">LoginSession / AuditLog</text>
+<text x="45" y="558" font-family="Consolas, monospace" font-size="17" text-anchor="start" fill="#173955">user_id / actor_id</text>
+<text x="223" y="175" font-family="SimSun, serif" font-size="18" text-anchor="start" fill="#173955">1:N 授课</text>
+<text x="690" y="175" font-family="SimSun, serif" font-size="18" text-anchor="start" fill="#173955">1:N 开课</text>
+<text x="318" y="276" font-family="SimSun, serif" font-size="18" text-anchor="start" fill="#173955">1:N</text>
+<text x="652" y="276" font-family="SimSun, serif" font-size="18" text-anchor="start" fill="#173955">N:1</text>
+<text x="222" y="405" font-family="SimSun, serif" font-size="18" text-anchor="start" fill="#173955">1:N 记录</text>
+<text x="690" y="405" font-family="SimSun, serif" font-size="18" text-anchor="start" fill="#173955">N:1 收集</text>
+<text x="100" y="400" font-family="SimSun, serif" font-size="18" text-anchor="start" fill="#173955">1:N</text>
 </svg>

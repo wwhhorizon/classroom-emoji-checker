@@ -32,7 +32,7 @@ Web 管理端使用同样的三部分组织角色页面。后端 `main.py` 为 C
 
 ![课堂表情系统数据库ER图](images/database-er.svg)
 
-ER图采用乌鸦脚表示法，列出七个实体和八组外键关联。每个课堂名单项关联一个学生和一节课堂；每条表情记录关联一节课堂，用户关联可为空。登录会话必须关联用户，审计的操作者可为空。字段旁的PK、FK、UK分别表示主键、外键和唯一键，NULL表示可空字段。
+图中保留核心实体、关键字段和1:N关系。登录会话与操作审计合并展示为辅助实体；表情记录中的`user_id?`表示该字段可为空。完整字段与约束见下表及`database/schema.sql`。
 
 图源为[可编辑SVG](images/database-er.svg)，另附[矢量PDF](images/database-er.pdf)和[PNG预览](images/database-er.png)。生成脚本为`scripts/build_er_diagram.py`，安装`requirements-report.txt`后可重新绘制。
 
