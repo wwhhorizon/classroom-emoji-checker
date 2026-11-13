@@ -7,6 +7,7 @@ import sys
 import xml.etree.ElementTree as ET
 
 ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 OUT=ROOT/'deliverables'/'latex-report'
 
 
@@ -17,6 +18,10 @@ def tex(s):
 
 def main():
     OUT.mkdir(parents=True,exist_ok=True);assets=OUT/'assets';assets.mkdir(exist_ok=True)
+    from scripts.build_er_diagram import main as build_er_diagram
+    build_er_diagram()
+    for suffix in ['pdf','svg']:
+        shutil.copy2(ROOT/'docs'/'images'/f'database-er.{suffix}',assets/f'database-er.{suffix}')
     from PIL import Image
     for name in ['student-desktop','teacher-desktop','statistics-desktop','schedule-desktop','ai-video-desktop','ai-records-desktop']:
         path=ROOT/'docs'/'images'/f'{name}.png'
@@ -43,7 +48,7 @@ def main():
     body=REPORT
     for key,value in values.items():body=body.replace('@@'+key+'@@',value)
     (OUT/'report.tex').write_text(body,encoding='utf-8')
-    (OUT/'README.md').write_text('# 编译实验报告\n\n安装TeX Live与中文字体包后，在当前目录执行两遍：\n\n```powershell\nxelatex -interaction=nonstopmode -halt-on-error report.tex\nxelatex -interaction=nonstopmode -halt-on-error report.tex\n```\n\n图片资源位于assets/。scripts/build_report.py根据验收JSON与JUnit结果生成报告。\n',encoding='utf-8')
+    (OUT/'README.md').write_text('# 编译实验报告\n\n安装TeX Live与中文字体包后，在当前目录执行两遍：\n\n```powershell\nxelatex -interaction=nonstopmode -halt-on-error report.tex\nxelatex -interaction=nonstopmode -halt-on-error report.tex\n```\n\n图片资源位于assets/，数据库ER图附矢量PDF和可编辑SVG。scripts/build_report.py根据验收JSON与JUnit结果生成报告；重新生成ER图需安装requirements-report.txt中的依赖。\n',encoding='utf-8')
     for _ in range(2):
         r=subprocess.run(['xelatex','-interaction=nonstopmode','-halt-on-error','report.tex'],cwd=OUT,capture_output=True,text=True,encoding='utf-8',errors='replace')
         if r.returncode:
@@ -221,29 +226,17 @@ AI采样用例由教师或管理员主动开始，视频帧经过独立推理服
 \texttt{ai\_service/} & 模型、独立API、采样worker、下载与验证\\
 \bottomrule\end{tabularx}\end{table}
 
+\clearpage
 \section{数据模型与接口契约}
 
 \subsection{关系实体}
 
-Course关联授课教师；ClassSession描述某次具体课堂；ScheduleUser连接课堂与学生；EmojiRecord保存人工或AI结果。LoginSession保存会话摘要，AuditLog保存关键操作。
+系统包含七个实体。课程、课堂和名单组织教学安排，表情记录关联课堂及用户，登录会话与操作审计分别关联用户。图中采用乌鸦脚表示法标注基数。
 
 \begin{figure}[H]\centering
-\begin{tikzpicture}[node distance=10mm and 9mm]
-\node[entity] (user) {\textbf{User}\\id, username, role\\password\_hash, active};
-\node[entity,right=of user] (course) {\textbf{Course}\\id, name\\teacher\_id};
-\node[entity,right=of course] (session) {\textbf{ClassSession}\\id, course\_id\\start\_at, end\_at, version};
-\node[entity,below=19mm of user] (schedule) {\textbf{ScheduleUser}\\session\_id, user\_id\\scheduled\_at};
-\node[entity,below=19mm of course] (record) {\textbf{EmojiRecord}\\session\_id, user\_id?\\emoji, source, confidence\\timestamp, event\_id};
-\node[entity,below=19mm of session] (audit) {\textbf{AuditLog / LoginSession}\\actor或user外键\\操作时间 / 会话有效期};
-\draw[arrow] (user) -- node[above,font=\scriptsize]{1:N 授课} (course);
-\draw[arrow] (course) -- node[above,font=\scriptsize]{1:N} (session);
-\draw[arrow] (user) -- (schedule);
-\draw[arrow] (session.south) -- ++(0,-7mm) -| (schedule.north);
-\draw[arrow] (session.south) -- ++(0,-10mm) -| (record.north);
-\draw[arrow] (user.south) -- ++(0,-12mm) -| (record.north);
-\draw[arrow] (user.north) -- ++(0,8mm) -| (audit.east);
-\end{tikzpicture}
-\caption{核心实体关系及辅助实体}\end{figure}
+\includegraphics[width=\textwidth,height=.76\textheight,keepaspectratio]{database-er.pdf}
+\caption{数据库实体关系、键约束与关联基数}\end{figure}
+\clearpage
 
 User的用户名唯一，角色限定为student、teacher和admin。ScheduleUser对课堂与学生建立组合唯一约束。EmojiRecord的emoji和source有枚举检查，置信度限定在0至1之间，AI记录必须有置信度，人工记录必须有关联学生。event\_id建立唯一约束，防止网络重试重复写入。
 
