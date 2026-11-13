@@ -7,4 +7,4 @@ xelatex -interaction=nonstopmode -halt-on-error report.tex
 xelatex -interaction=nonstopmode -halt-on-error report.tex
 ```
 
-图片资源位于assets/。scripts/build_report.py根据验收JSON与JUnit结果生成报告。
+图片资源位于assets/，数据库ER图附矢量PDF和可编辑SVG。scripts/build_report.py根据验收JSON与JUnit结果生成报告；重新生成ER图需安装requirements-report.txt中的依赖。
